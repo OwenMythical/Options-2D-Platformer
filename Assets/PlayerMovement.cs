@@ -12,6 +12,8 @@ public class PlayerMovement : MonoBehaviour
 
     float SuperJumpTimer = 0;
     bool SuperJumping = false;
+    bool SuperLeaping = false;
+    float SuperJumpMultiplier = 1;
 
     Rigidbody2D RB;
     Animator AN;
@@ -31,8 +33,9 @@ public class PlayerMovement : MonoBehaviour
         float XAxis = Input.GetAxis("Horizontal");
         float XAxisRaw = Input.GetAxisRaw("Horizontal");
 
+
         //Walking + Sliding
-        if (SuperJumping == false)
+        if (SuperLeaping == false)
         {
             if (XAxis > 0 && XAxisRaw == 1)
             {
@@ -74,7 +77,7 @@ public class PlayerMovement : MonoBehaviour
                 AN.SetBool("Sliding", false);
                 PS.Stop();
             }
-            RB.velocity = new Vector2(XAxis * MovementSpeed, RB.velocity.y);
+            RB.velocity = new Vector2(XAxis * MovementSpeed * SuperJumpMultiplier, RB.velocity.y);
         }
 
         //Jumping
@@ -86,6 +89,15 @@ public class PlayerMovement : MonoBehaviour
                 SuperJumpTimer = 0;
                 SuperJumping = true;
                 AN.SetBool("SuperJumping", true);
+
+                if (Mathf.Abs(Mathf.Round(XAxis)) == 1)
+                {
+                    SuperLeaping = true;
+                }
+                else
+                {
+                    SuperJumpMultiplier = 0.25f;
+                }
             }
             else
             {
@@ -93,10 +105,15 @@ public class PlayerMovement : MonoBehaviour
             }
             PS.Stop();
         }
-        if (RB.velocity.y < 0)
+        if (RB.velocity.y < 0 && SuperJumping == true)
         {
             SuperJumping = false;
             AN.SetBool("SuperJumping", false);
+            if (SuperLeaping == false)
+            {
+                StartCoroutine(RestoreSuperJumpSpeed());
+            }
+            SuperLeaping = false;
         }
 
         //Up and Down
@@ -107,7 +124,7 @@ public class PlayerMovement : MonoBehaviour
             if (SuperJumpTimer < 3)
             {
                 SuperJumpTimer += Time.deltaTime;
-                if (SuperJumpTimer > 2)
+                if (SuperJumpTimer > 1.5)
                 {
                     SuperJumpTimer = 3;
                 }
@@ -162,6 +179,15 @@ public class PlayerMovement : MonoBehaviour
                 SR.color = new Color32(255, 255, 255, 255);
             }
             yield return new WaitForSeconds(0.1f);
+        }
+    }
+
+    IEnumerator RestoreSuperJumpSpeed()
+    {
+        while (SuperJumpMultiplier < 1)
+        {
+            SuperJumpMultiplier += 0.05f;
+            yield return new WaitForSeconds(0.05f);
         }
     }
 }
