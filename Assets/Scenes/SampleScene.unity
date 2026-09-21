@@ -137,6 +137,7 @@ GameObject:
   - component: {fileID: 244405481}
   - component: {fileID: 244405482}
   - component: {fileID: 244405483}
+  - component: {fileID: 244405484}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -298,6 +299,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   JumpHeight: 5
+  SuperJumpHeight: 8
   MovementSpeed: 5
   PS: {fileID: 1585925851}
   Cam: {fileID: 519420028}
@@ -357,6 +359,19 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.34}
   m_Size: {x: 0.62, y: 0.335}
   m_Direction: 1
+--- !u!114 &244405484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 244405476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d2a365b3891b274e97e42907ec5531a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Level: 0
 --- !u!1 &496681313
 GameObject:
   m_ObjectHideFlags: 0
