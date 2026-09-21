@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     bool SuperJumping = false;
     bool SuperLeaping = false;
     float SuperJumpMultiplier = 1;
+    float SuperChargeMultiplier = 1;
 
     Rigidbody2D RB;
     Animator AN;
@@ -77,7 +78,7 @@ public class PlayerMovement : MonoBehaviour
                 AN.SetBool("Sliding", false);
                 PS.Stop();
             }
-            RB.velocity = new Vector2(XAxis * MovementSpeed * SuperJumpMultiplier, RB.velocity.y);
+            RB.velocity = new Vector2(XAxis * MovementSpeed * SuperJumpMultiplier * SuperChargeMultiplier, RB.velocity.y);
         }
 
         //Jumping
@@ -90,7 +91,7 @@ public class PlayerMovement : MonoBehaviour
                 SuperJumping = true;
                 AN.SetBool("SuperJumping", true);
 
-                if (Mathf.Abs(Mathf.Round(XAxis)) == 1)
+                if (Mathf.Abs(XAxis) == 1)
                 {
                     SuperLeaping = true;
                 }
@@ -117,14 +118,15 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //Up and Down
-        if (Input.GetKey(KeyCode.W) == true && Mathf.Approximately(RB.velocity.y, 0f) == true && Mathf.Approximately(RB.velocity.x, 0f) == true)
+        if (Input.GetKey(KeyCode.W) == true && Mathf.Approximately(RB.velocity.y, 0f) == true)
         {
             Cam.transform.position = new Vector3(Cam.transform.position.x, Mathf.Lerp(Cam.transform.position.y, gameObject.transform.position.y + 1.5f, 0.05f), -10);
+            SuperChargeMultiplier = 0.25f;
 
             if (SuperJumpTimer < 3)
             {
                 SuperJumpTimer += Time.deltaTime;
-                if (SuperJumpTimer > 1.5)
+                if (SuperJumpTimer > 1)
                 {
                     SuperJumpTimer = 3;
                 }
@@ -138,13 +140,15 @@ public class PlayerMovement : MonoBehaviour
                 SuperJumpTimer = 0;
             }
         }
-        if (Input.GetKey(KeyCode.S) == true && Mathf.Approximately(RB.velocity.y, 0f) == true && Mathf.Approximately(RB.velocity.x, 0f) == true)
+        if (Input.GetKey(KeyCode.S) == true && Mathf.Approximately(RB.velocity.y, 0f) == true)
         {
             Cam.transform.position = new Vector3(Cam.transform.position.x, Mathf.Lerp(Cam.transform.position.y, gameObject.transform.position.y - 1.5f, 0.05f), -10);
+            SuperChargeMultiplier = 0.25f;
         }
-        if (Input.GetKey(KeyCode.W) == false && Input.GetKey(KeyCode.S) == false || Mathf.Approximately(RB.velocity.y, 0f) == false || Mathf.Approximately(RB.velocity.x, 0f) == false)
+        if (Input.GetKey(KeyCode.W) == false && Input.GetKey(KeyCode.S) == false || Mathf.Approximately(RB.velocity.y, 0f) == false)
         {
             Cam.transform.position = new Vector3(Cam.transform.position.x, Mathf.Lerp(Cam.transform.position.y, gameObject.transform.position.y, 0.05f), -10);
+            SuperChargeMultiplier = 1f;
         }
 
         //Misc
@@ -165,7 +169,7 @@ public class PlayerMovement : MonoBehaviour
                 if (Toggle == false)
                 {
                     Toggle = true;
-                    SR.color = new Color32(255, 240, 255, 255);
+                    SR.color = new Color32(255, 225, 255, 255);
                 }
                 else
                 {
