@@ -91,7 +91,7 @@ public class PlayerMovement : MonoBehaviour
                 SuperJumping = true;
                 AN.SetBool("SuperJumping", true);
 
-                if (Mathf.Abs(XAxis) == 1)
+                if (Mathf.Abs(XAxis) == 1 && SuperChargeMultiplier == 1)
                 {
                     SuperLeaping = true;
                 }
