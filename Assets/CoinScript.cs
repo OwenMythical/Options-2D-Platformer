@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.SearchService;
@@ -10,19 +11,23 @@ public class CoinScript : MonoBehaviour
     bool Collected = false;
 
     GameObject Player;
+    GameObject GameController;
     CollectableManager CM;
     Animator AN;
     Rigidbody2D RB;
     SpriteRenderer SR;
+    AudioSource AS;
 
     // Start is called before the first frame update
     void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
-        CM = Player.GetComponent<CollectableManager>();
+        GameController = GameObject.FindGameObjectWithTag("GameController");
+        CM = GameController.GetComponent<CollectableManager>();
         AN = gameObject.GetComponent<Animator>();
         RB = gameObject.GetComponent<Rigidbody2D>();
         SR = gameObject.GetComponent<SpriteRenderer>();
+        AS = gameObject.GetComponent<AudioSource>();
     }
 
     private IEnumerator OnTriggerEnter2D(Collider2D collision)
@@ -36,7 +41,9 @@ public class CoinScript : MonoBehaviour
             CM.CoinCollect(Value);
             AN.speed = 5;
             RB.bodyType = RigidbodyType2D.Dynamic;
-            RB.velocity = new Vector2(0,3);
+            RB.velocity = new Vector2(0, 3);
+            AS.pitch += UnityEngine.Random.Range(-0.05f, 0.05f);
+            AS.Play();
             byte A = 255;
             for (int i = 1; i < 10; i++)
             {

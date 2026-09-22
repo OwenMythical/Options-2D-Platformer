@@ -20,6 +20,12 @@ public class PlayerMovement : MonoBehaviour
     Animator AN;
     SpriteRenderer SR;
     BoxCollider2D BC;
+    AudioSource AS;
+
+    public AudioClip ChargedSound;
+    public AudioClip JumpSound;
+    public AudioClip SuperJumpSound;
+    public GameObject AudioPlayer;
 
     void Start()
     {
@@ -27,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
         AN = gameObject.GetComponent<Animator>();
         SR = gameObject.GetComponent<SpriteRenderer>();
         BC = gameObject.GetComponent<BoxCollider2D>();
+        AS = gameObject.GetComponent<AudioSource>();
 
         StartCoroutine(SuperJumpFlicker());
     }
@@ -96,6 +103,7 @@ public class PlayerMovement : MonoBehaviour
                 AN.SetBool("SuperJumping", true);
                 BC.offset = new Vector2(0f, -0.15f);
                 BC.size = new Vector2(0.6f, 0.6f);
+                StartCoroutine(AudioPlay(SuperJumpSound, 1f));
 
                 if (Mathf.Abs(XAxis) == 1 && SuperChargeMultiplier == 1)
                 {
@@ -109,6 +117,7 @@ public class PlayerMovement : MonoBehaviour
             else
             {
                 RB.velocity += new Vector2(0, JumpHeight);
+                StartCoroutine(AudioPlay(JumpSound, 1f));
             }
             PS.Stop();
         }
@@ -126,9 +135,13 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //Up and Down
+        if (Input.GetKeyDown(KeyCode.W) && Mathf.Approximately(RB.velocity.y, 0f) == true)
+        {
+            SuperJumpTimer = 0;
+        }
         if (Input.GetKey(KeyCode.W) == true && Mathf.Approximately(RB.velocity.y, 0f) == true)
         {
-            Cam.transform.position = new Vector3(Cam.transform.position.x, Mathf.Lerp(Cam.transform.position.y, gameObject.transform.position.y + 1.5f, 0.05f), -10);
+            Cam.transform.position = new Vector3(Cam.transform.position.x, Mathf.Lerp(Cam.transform.position.y, gameObject.transform.position.y + 1.5f, 0.01f), -10);
             SuperChargeMultiplier = 0.25f;
 
             if (SuperJumpTimer < 3)
@@ -150,12 +163,12 @@ public class PlayerMovement : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.S) == true && Mathf.Approximately(RB.velocity.y, 0f) == true)
         {
-            Cam.transform.position = new Vector3(Cam.transform.position.x, Mathf.Lerp(Cam.transform.position.y, gameObject.transform.position.y - 1.5f, 0.05f), -10);
+            Cam.transform.position = new Vector3(Cam.transform.position.x, Mathf.Lerp(Cam.transform.position.y, gameObject.transform.position.y - 1.5f, 0.01f), -10);
             SuperChargeMultiplier = 0.25f;
         }
         if (Input.GetKey(KeyCode.W) == false && Input.GetKey(KeyCode.S) == false || Mathf.Approximately(RB.velocity.y, 0f) == false)
         {
-            Cam.transform.position = new Vector3(Cam.transform.position.x, Mathf.Lerp(Cam.transform.position.y, gameObject.transform.position.y, 0.05f), -10);
+            Cam.transform.position = new Vector3(Cam.transform.position.x, Mathf.Lerp(Cam.transform.position.y, gameObject.transform.position.y, 0.01f), -10);
             SuperChargeMultiplier = 1f;
         }
 
@@ -185,6 +198,7 @@ public class PlayerMovement : MonoBehaviour
                     Toggle = false;
                     SR.color = new Color32(255, 255, 255, 255);
                 }
+                StartCoroutine(AudioPlay(ChargedSound, 0.75f));
             }
             else if (Toggle == true)
             {
@@ -202,5 +216,11 @@ public class PlayerMovement : MonoBehaviour
             SuperJumpMultiplier += 0.05f;
             yield return new WaitForSeconds(0.05f);
         }
+    }
+
+    IEnumerator AudioPlay(AudioClip AC, float Volume)
+    {
+        AS.PlayOneShot(AC,Volume);
+        yield return new WaitForSeconds(0);
     }
 }
