@@ -19,12 +19,14 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody2D RB;
     Animator AN;
     SpriteRenderer SR;
+    BoxCollider2D BC;
 
     void Start()
     {
         RB = gameObject.GetComponent<Rigidbody2D>();
         AN = gameObject.GetComponent<Animator>();
         SR = gameObject.GetComponent<SpriteRenderer>();
+        BC = gameObject.GetComponent<BoxCollider2D>();
 
         StartCoroutine(SuperJumpFlicker());
     }
@@ -90,6 +92,8 @@ public class PlayerMovement : MonoBehaviour
                 SuperJumpTimer = 0;
                 SuperJumping = true;
                 AN.SetBool("SuperJumping", true);
+                BC.offset = new Vector2(0f, -0.15f);
+                BC.size = new Vector2(0.6f, 0.6f);
 
                 if (Mathf.Abs(XAxis) == 1 && SuperChargeMultiplier == 1)
                 {
@@ -115,6 +119,8 @@ public class PlayerMovement : MonoBehaviour
                 StartCoroutine(RestoreSuperJumpSpeed());
             }
             SuperLeaping = false;
+            BC.offset = new Vector2(0f, -0.25f);
+            BC.size = new Vector2(0.9f, 0.45f);
         }
 
         //Up and Down

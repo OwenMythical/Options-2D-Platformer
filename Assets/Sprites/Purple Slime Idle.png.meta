@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d74f4de9cb5a3464b9e0edca026c58e2
+guid: 330935dd995065348b6c4b6a8cd4edc5
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 50
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -141,8 +141,8 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 50
-        height: 50
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -150,8 +150,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 76966d5a1192f334d8511449f6c0b2ef
-      internalID: -1297541748
+      spriteID: de5edaa3cf53fe94093285b295f82a02
+      internalID: 446071476
       vertices: []
       indices: 
       edges: []
@@ -160,10 +160,10 @@ TextureImporter:
       name: Purple Slime Idle_1
       rect:
         serializedVersion: 2
-        x: 50
+        x: 32
         y: 0
-        width: 50
-        height: 50
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -171,8 +171,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9552652abc1792446882de07f86bb607
-      internalID: -1384943681
+      spriteID: a53f9b12099955049bfef8f04f18b4ec
+      internalID: 10994739
       vertices: []
       indices: 
       edges: []
@@ -181,10 +181,10 @@ TextureImporter:
       name: Purple Slime Idle_2
       rect:
         serializedVersion: 2
-        x: 100
+        x: 64
         y: 0
-        width: 50
-        height: 50
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -192,8 +192,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a17efdc13dbeff542a6a39385b5290b0
-      internalID: -1377564458
+      spriteID: 55bf5f4c6ca9c824fb9b6800e600bd42
+      internalID: -1508124310
       vertices: []
       indices: 
       edges: []
@@ -202,10 +202,10 @@ TextureImporter:
       name: Purple Slime Idle_3
       rect:
         serializedVersion: 2
-        x: 150
+        x: 96
         y: 0
-        width: 50
-        height: 50
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -213,8 +213,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 497b281171f0a404c898845a5fc9d63f
-      internalID: -1837249206
+      spriteID: 7336c217012f80047b6423a3dfb8e0e7
+      internalID: 713322101
       vertices: []
       indices: 
       edges: []
@@ -230,10 +230,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Purple Slime Idle_0: -1297541748
-      Purple Slime Idle_1: -1384943681
-      Purple Slime Idle_2: -1377564458
-      Purple Slime Idle_3: -1837249206
+      Purple Slime Idle_0: 446071476
+      Purple Slime Idle_1: 10994739
+      Purple Slime Idle_2: -1508124310
+      Purple Slime Idle_3: 713322101
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

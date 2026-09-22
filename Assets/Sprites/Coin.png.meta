@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 64aa79074666b414db4277b78640038c
+guid: 92194f33e9add9746b25a4fe3bf9066b
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 50
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -136,13 +136,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PurpleSlimeSpin_0
+      name: Coin_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 50
-        height: 50
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -150,20 +150,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1ec87ffaa41882d4ea97f7f54cdb499f
-      internalID: -1902250987
+      spriteID: c36a46eb832f7c545b6d749017cb5574
+      internalID: 885988652
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PurpleSlimeSpin_1
+      name: Coin_1
       rect:
         serializedVersion: 2
-        x: 50
+        x: 32
         y: 0
-        width: 50
-        height: 50
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -171,20 +171,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e14f613ad9fc19344a8d0411a50fa6f5
-      internalID: -473382683
+      spriteID: 1650b9b62922b9944b2db77465ee81a2
+      internalID: 1450534093
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PurpleSlimeSpin_2
+      name: Coin_2
       rect:
         serializedVersion: 2
-        x: 100
+        x: 64
         y: 0
-        width: 50
-        height: 50
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -192,20 +192,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2d86400f41e9c774cb350a538c780fcf
-      internalID: 804198810
+      spriteID: fb85377149a94cc45b6920619e46c30c
+      internalID: -1410853345
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PurpleSlimeSpin_3
+      name: Coin_3
       rect:
         serializedVersion: 2
-        x: 150
+        x: 96
         y: 0
-        width: 50
-        height: 50
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -213,8 +213,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bacaee97ece03f441a31f7d61206df5a
-      internalID: -1738461699
+      spriteID: dc054db43bd7e054b8b050a8fa5d56e4
+      internalID: 1392083818
       vertices: []
       indices: 
       edges: []
@@ -230,10 +230,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      PurpleSlimeSpin_0: -1902250987
-      PurpleSlimeSpin_1: -473382683
-      PurpleSlimeSpin_2: 804198810
-      PurpleSlimeSpin_3: -1738461699
+      Coin_0: 885988652
+      Coin_1: 1450534093
+      Coin_2: -1410853345
+      Coin_3: 1392083818
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
