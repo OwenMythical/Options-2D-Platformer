@@ -47608,7 +47608,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0.4433961, b: 0.8923749, a: 1}
+      maxColor: {r: 1, g: 0.7311321, b: 0.9488773, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -47672,7 +47672,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.05
+      scalar: 0.065
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -47996,7 +47996,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.5
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -48055,8 +48055,8 @@ ParticleSystem:
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 0
     donutRadius: 0.2
-    m_Position: {x: -0.3, y: -0.49, z: 0}
-    m_Rotation: {x: -0, y: 0, z: 150}
+    m_Position: {x: -0.35, y: -0.48, z: 0}
+    m_Rotation: {x: -0, y: 0, z: 155}
     m_Scale: {x: 1, y: 1, z: 1}
     placementMode: 0
     m_MeshMaterialIndex: 0
@@ -48193,7 +48193,7 @@ ParticleSystem:
           m_PostInfinity: 2
           m_RotationOrder: 4
     arc:
-      value: 45
+      value: 25
       mode: 0
       spread: 0
       speed:
@@ -48381,12 +48381,12 @@ ParticleSystem:
           outWeight: 0.33333334
         - serializedVersion: 3
           time: 1
-          value: 0.50450134
-          inSlope: 1
-          outSlope: 1
+          value: 0
+          inSlope: -2.9961343
+          outSlope: -2.9961343
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.33333334
+          inWeight: 0.10824758
           outWeight: 0.33333334
         m_PreInfinity: 2
         m_PostInfinity: 2

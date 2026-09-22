@@ -37,8 +37,10 @@ public class CoinScript : MonoBehaviour
             AN.speed = 5;
             RB.bodyType = RigidbodyType2D.Dynamic;
             RB.velocity = new Vector2(0,3);
-            for (byte A = 255; A > 0; A -= 50)
+            byte A = 255;
+            for (int i = 1; i < 10; i++)
             {
+                A -= 25;
                 yield return new WaitForSeconds(0.05f);
                 SR.color = new Color32(R,G,B,A);
             }

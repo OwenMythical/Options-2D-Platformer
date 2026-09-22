@@ -81,6 +81,8 @@ public class PlayerMovement : MonoBehaviour
                 PS.Stop();
             }
             RB.velocity = new Vector2(XAxis * MovementSpeed * SuperJumpMultiplier * SuperChargeMultiplier, RB.velocity.y);
+            var Main = PS.main;
+            Main.startSpeed = Mathf.Clamp(3 * SuperJumpMultiplier * SuperChargeMultiplier,1.5f,3);
         }
 
         //Jumping
@@ -158,6 +160,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //Misc
+        RB.velocity = new Vector2(RB.velocity.x, Mathf.Clamp(RB.velocity.y, -10f, 10f));
         AN.SetFloat("YVelocity", Mathf.RoundToInt(RB.velocity.y));
         if (Mathf.Approximately(RB.velocity.y, 0f) == false)
         {
