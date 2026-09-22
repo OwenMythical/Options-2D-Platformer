@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public float MovementSpeed;
     public ParticleSystem PS;
     public GameObject Cam;
+    public BoxCollider2D GroundChecker;
 
     float SuperJumpTimer = 0;
     bool SuperJumping = false;
@@ -20,8 +22,10 @@ public class PlayerMovement : MonoBehaviour
     Animator AN;
     SpriteRenderer SR;
     BoxCollider2D BC;
-    AudioSource AS;
+    CompositeCollider2D CollideMap;
+    CompositeCollider2D OneWayMap;
 
+    AudioSource AS;
     public AudioClip ChargedSound;
     public AudioClip JumpSound;
     public AudioClip SuperJumpSound;
@@ -34,6 +38,9 @@ public class PlayerMovement : MonoBehaviour
         SR = gameObject.GetComponent<SpriteRenderer>();
         BC = gameObject.GetComponent<BoxCollider2D>();
         AS = gameObject.GetComponent<AudioSource>();
+
+        CollideMap = GameObject.FindGameObjectWithTag("CollideMap").GetComponent<CompositeCollider2D>();
+        OneWayMap = GameObject.FindGameObjectWithTag("OneWayMap").GetComponent<CompositeCollider2D>();
 
         StartCoroutine(SuperJumpFlicker());
     }
@@ -93,7 +100,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //Jumping
-        if (Input.GetKey(KeyCode.Space) == true && Mathf.Approximately(RB.velocity.y, 0f) == true)
+        if (Input.GetKey(KeyCode.Space) == true && Mathf.Approximately(RB.velocity.y, 0f) == true && (GroundChecker.IsTouching(CollideMap) || GroundChecker.IsTouching(OneWayMap)))
         {
             if (SuperJumpTimer > 2.5)
             {
@@ -135,11 +142,11 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //Up and Down
-        if (Input.GetKeyDown(KeyCode.W) && Mathf.Approximately(RB.velocity.y, 0f) == true)
+        if (Input.GetKeyDown(KeyCode.W) && Mathf.Approximately(RB.velocity.y, 0f) == true && (GroundChecker.IsTouching(CollideMap) || GroundChecker.IsTouching(OneWayMap)))
         {
             SuperJumpTimer = 0;
         }
-        if (Input.GetKey(KeyCode.W) == true && Mathf.Approximately(RB.velocity.y, 0f) == true)
+        if (Input.GetKey(KeyCode.W) == true && Mathf.Approximately(RB.velocity.y, 0f) == true && (GroundChecker.IsTouching(CollideMap) || GroundChecker.IsTouching(OneWayMap)))
         {
             Cam.transform.position = new Vector3(Cam.transform.position.x, Mathf.Lerp(Cam.transform.position.y, gameObject.transform.position.y + 1.5f, 0.01f), -10);
             SuperChargeMultiplier = 0.25f;
@@ -161,7 +168,7 @@ public class PlayerMovement : MonoBehaviour
                 SuperJumpTimer = 0;
             }
         }
-        if (Input.GetKey(KeyCode.S) == true && Mathf.Approximately(RB.velocity.y, 0f) == true)
+        if (Input.GetKey(KeyCode.S) == true && Mathf.Approximately(RB.velocity.y, 0f) == true && (GroundChecker.IsTouching(CollideMap) || GroundChecker.IsTouching(OneWayMap)))
         {
             Cam.transform.position = new Vector3(Cam.transform.position.x, Mathf.Lerp(Cam.transform.position.y, gameObject.transform.position.y - 1.5f, 0.01f), -10);
             SuperChargeMultiplier = 0.25f;
