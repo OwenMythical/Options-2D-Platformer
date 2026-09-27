@@ -11,6 +11,14 @@ public class BackgroundScrolling : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (XSpeed == 0)
+        {
+            XSpeed = Mathf.Infinity;
+        }
+        if (YSpeed == 0)
+        {
+            YSpeed = Mathf.Infinity;
+        }
         gameObject.transform.position = new Vector3(-Player.transform.position.x/XSpeed, -Player.transform.position.y/YSpeed, 0);
     }
 }
