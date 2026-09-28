@@ -3,20 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
+    public int Health;
     public float JumpHeight;
     public float SuperJumpHeight;
     public float MovementSpeed;
     public ParticleSystem PS;
     public GameObject Cam;
     public BoxCollider2D GroundChecker;
+    public PhysicsMaterial2D PhysicsObj;
 
     float SuperJumpTimer = 0;
     bool SuperJumping = false;
     bool SuperLeaping = false;
     float SuperJumpMultiplier = 1;
     float SuperChargeMultiplier = 1;
+
+    public bool Stunned = false;
+    float StunMultiplier = 1;
+    public float KnockbackForce;
 
     Rigidbody2D RB;
     Animator AN;
@@ -50,9 +56,8 @@ public class PlayerMovement : MonoBehaviour
         float XAxis = Input.GetAxis("Horizontal");
         float XAxisRaw = Input.GetAxisRaw("Horizontal");
 
-
         //Walking + Sliding
-        if (SuperLeaping == false)
+        if (SuperLeaping == false && Stunned == false)
         {
             if (XAxis > 0 && XAxisRaw == 1)
             {
@@ -94,7 +99,7 @@ public class PlayerMovement : MonoBehaviour
                 AN.SetBool("Sliding", false);
                 PS.Stop();
             }
-            RB.velocity = new Vector2(XAxis * MovementSpeed * SuperJumpMultiplier * SuperChargeMultiplier, RB.velocity.y);
+            RB.velocity = new Vector2(XAxis * MovementSpeed * SuperJumpMultiplier * SuperChargeMultiplier * StunMultiplier, RB.velocity.y);
             var Main = PS.main;
             Main.startSpeed = Mathf.Clamp(3 * SuperJumpMultiplier * SuperChargeMultiplier,1.5f,3);
         }
@@ -115,6 +120,7 @@ public class PlayerMovement : MonoBehaviour
                 if (Mathf.Abs(XAxis) == 1 && SuperChargeMultiplier == 1)
                 {
                     SuperLeaping = true;
+                    SuperJumpMultiplier = 0.25f;
                 }
                 else
                 {
@@ -135,6 +141,14 @@ public class PlayerMovement : MonoBehaviour
             if (SuperLeaping == false)
             {
                 StartCoroutine(RestoreSuperJumpSpeed());
+            }
+            else if (RB.velocity.x < 2.5f)
+            {
+                StartCoroutine(RestoreSuperJumpSpeed());
+            }
+            else
+            {
+                SuperJumpMultiplier = 1f;
             }
             SuperLeaping = false;
             BC.offset = new Vector2(0f, -0.25f);
@@ -229,5 +243,40 @@ public class PlayerMovement : MonoBehaviour
     {
         AS.PlayOneShot(AC,Volume);
         yield return new WaitForSeconds(0);
+    }
+
+    public IEnumerator Damage(int Value,Vector3 Source)
+    {
+        if (Stunned == false && StunMultiplier == 1)
+        {
+            Stunned = true;
+            AN.SetBool("Stunned", true);
+            Health -= Value;
+            RB.velocity = (gameObject.transform.position - Source) * KnockbackForce + new Vector3(0, KnockbackForce);
+            if (RB.velocity.x < 0)
+            {
+                SR.flipX = true;
+                PS.transform.rotation = new Quaternion(0, 180, 0, 0);
+            }
+            else
+            {
+                SR.flipX = false;
+                PS.transform.rotation = new Quaternion(0, 0, 0, 0);
+            }
+            yield return new WaitForSeconds(0.5f);
+            int Timer = 0;
+            while (Timer < 15 && !(GroundChecker.IsTouching(CollideMap) || GroundChecker.IsTouching(OneWayMap)))
+            {
+                Timer += 1;
+                yield return new WaitForSeconds(0.1f);
+            }
+            AN.SetBool("Stunned", false);
+            Stunned = false;
+        }
+    }
+
+    public void Bounce(Vector2 Force)
+    {
+        RB.velocity = Force;
     }
 }
