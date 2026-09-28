@@ -23,7 +23,14 @@ public class RedSlimeMovement : MonoBehaviour
         TileBase T = TM.GetTile(Position);
         if (T == null)
         {
-            gameObject.transform.rotation = new Quaternion(0, gameObject.transform.rotation.y+180, 0, 0);
+            if (gameObject.transform.rotation.y == 0)
+            {
+                gameObject.transform.rotation = new Quaternion(0, 180, 0, 0);
+            }
+            else
+            {
+                gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
+            }
             Debug.Log(gameObject.transform.rotation.y);
         }
     }
