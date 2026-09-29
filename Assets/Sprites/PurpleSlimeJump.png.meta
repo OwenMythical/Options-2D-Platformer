@@ -177,48 +177,6 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: PurpleSlimeJump_2
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8a71978bdc9d5a64f8653994dbfe0db8
-      internalID: -481140597
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PurpleSlimeJump_3
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 17d9791df0ce0c64289f04c583b077db
-      internalID: 796094288
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -232,8 +190,6 @@ TextureImporter:
     nameFileIdTable:
       PurpleSlimeJump_0: 1451851095
       PurpleSlimeJump_1: -1161309301
-      PurpleSlimeJump_2: -481140597
-      PurpleSlimeJump_3: 796094288
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

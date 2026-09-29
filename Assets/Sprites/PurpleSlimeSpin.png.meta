@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: cc068df9c17e4c845bd8eedd8acf5cd0
+guid: 79143195e1e347e4e8456fcf2829d31b
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -93,50 +93,11 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: iPhone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Purple Slime Spin_0
+      name: PurpleSlimeSpin_0
       rect:
         serializedVersion: 2
         x: 0
@@ -150,14 +111,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bea6b8811f8e23d4f918da5e4fd8037a
-      internalID: -1805882703
+      spriteID: 341fdb1a06acb004eb4b959f6a399a83
+      internalID: -194541177
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Purple Slime Spin_1
+      name: PurpleSlimeSpin_1
       rect:
         serializedVersion: 2
         x: 32
@@ -171,14 +132,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 15cde28a6f9229645ab1accd2293a10d
-      internalID: -1005280800
+      spriteID: 274be1a055acebd47a5f6aee7729ff13
+      internalID: 245061587
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Purple Slime Spin_2
+      name: PurpleSlimeSpin_2
       rect:
         serializedVersion: 2
         x: 64
@@ -192,14 +153,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3eb7ea6b902d2eb4a97c86ab8365d780
-      internalID: -1678704892
+      spriteID: 1ba0095bed073694db3fcd27056048a1
+      internalID: 1970225762
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Purple Slime Spin_3
+      name: PurpleSlimeSpin_3
       rect:
         serializedVersion: 2
         x: 96
@@ -213,8 +174,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8fa049535b18d3244a1e090d0db6dbe5
-      internalID: 721369561
+      spriteID: 0e47953bcb0987e48942bbf1aa720527
+      internalID: 1941972110
       vertices: []
       indices: 
       edges: []
@@ -230,10 +191,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Purple Slime Spin_0: -1805882703
-      Purple Slime Spin_1: -1005280800
-      Purple Slime Spin_2: -1678704892
-      Purple Slime Spin_3: 721369561
+      PurpleSlimeSpin_0: -194541177
+      PurpleSlimeSpin_1: 245061587
+      PurpleSlimeSpin_2: 1970225762
+      PurpleSlimeSpin_3: 1941972110
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
