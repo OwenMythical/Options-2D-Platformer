@@ -152,7 +152,7 @@ public class PlayerController : MonoBehaviour
             }
             SuperLeaping = false;
             BC.offset = new Vector2(0f, -0.25f);
-            BC.size = new Vector2(0.9f, 0.45f);
+            BC.size = new Vector2(0.9f, 0.47f);
         }
 
         //Up and Down
