@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a543d97cc881dc4499fedc809e88868a
+guid: 735edf8032c6886449d90bac7e17cd2a
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -136,7 +136,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Purple Slime Fall_0
+      name: PurpleSlimeJump_0
       rect:
         serializedVersion: 2
         x: 0
@@ -150,14 +150,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 86b6bddb890091a40953e6e07df6946c
-      internalID: 1429574871
+      spriteID: 8124fe451a9523c4f8ae2d2851b4c1f8
+      internalID: 1451851095
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Purple Slime Fall_1
+      name: PurpleSlimeJump_1
       rect:
         serializedVersion: 2
         x: 32
@@ -171,14 +171,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 877ceb5be50bb84489c543db7e540802
-      internalID: 333413113
+      spriteID: 88154e3fd3129f140a1600f66317e426
+      internalID: -1161309301
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Purple Slime Fall_2
+      name: PurpleSlimeJump_2
       rect:
         serializedVersion: 2
         x: 64
@@ -192,8 +192,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 969d83348e990154c9c5bcaecaacbf5d
-      internalID: 240694637
+      spriteID: 8a71978bdc9d5a64f8653994dbfe0db8
+      internalID: -481140597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PurpleSlimeJump_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17d9791df0ce0c64289f04c583b077db
+      internalID: 796094288
       vertices: []
       indices: 
       edges: []
@@ -209,9 +230,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Purple Slime Fall_0: 1429574871
-      Purple Slime Fall_1: 333413113
-      Purple Slime Fall_2: 240694637
+      PurpleSlimeJump_0: 1451851095
+      PurpleSlimeJump_1: -1161309301
+      PurpleSlimeJump_2: -481140597
+      PurpleSlimeJump_3: 796094288
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

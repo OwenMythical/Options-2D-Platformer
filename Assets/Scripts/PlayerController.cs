@@ -142,7 +142,7 @@ public class PlayerController : MonoBehaviour
             {
                 StartCoroutine(RestoreSuperJumpSpeed());
             }
-            else if (RB.velocity.x < 2.5f)
+            else if (RB.velocity.x < 1.5f)
             {
                 StartCoroutine(RestoreSuperJumpSpeed());
             }
