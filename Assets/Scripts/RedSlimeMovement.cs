@@ -11,6 +11,7 @@ public class RedSlimeMovement : MonoBehaviour
     public GameObject TileChecker;
     Tilemap TM;
     Rigidbody2D RB;
+    AudioSource AS;
     bool Paused = false;
 
     // Start is called before the first frame update
@@ -18,6 +19,7 @@ public class RedSlimeMovement : MonoBehaviour
     {
         TM = GameObject.FindGameObjectWithTag("CollideMap").GetComponent<Tilemap>();
         RB = gameObject.GetComponent<Rigidbody2D>();
+        AS = gameObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame

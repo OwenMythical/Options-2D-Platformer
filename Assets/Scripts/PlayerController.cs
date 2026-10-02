@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour
     public AudioClip ChargedSound;
     public AudioClip JumpSound;
     public AudioClip SuperJumpSound;
+    public AudioClip HurtSound;
     public GameObject AudioPlayer;
 
     void Start()
@@ -51,10 +52,25 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(SuperJumpFlicker());
     }
 
+    float XAxis = 0f;
+    float Smoothing = 0.05f;
     void Update()
     {
-        float XAxis = Input.GetAxis("Horizontal");
         float XAxisRaw = Input.GetAxisRaw("Horizontal");
+        XAxis = Mathf.Lerp(XAxis, XAxisRaw, Smoothing);
+        if (XAxis < 0.1f && XAxis > -0.1f && XAxisRaw == 0)
+        {
+            XAxis = 0;
+        }
+        if (XAxis > 0.9f && XAxisRaw == 1)
+        {
+            XAxis = 1;
+        }
+        if (XAxis < -0.9f && XAxisRaw == -1)
+        {
+            XAxis = -1;
+        }
+        Debug.Log(XAxis);
 
         //Walking + Sliding
         if (SuperLeaping == false && Stunned == false)
@@ -251,6 +267,7 @@ public class PlayerController : MonoBehaviour
         {
             Stunned = true;
             AN.SetBool("Stunned", true);
+            StartCoroutine(AudioPlay(HurtSound, 1f));
             Health -= Value;
             RB.velocity = (gameObject.transform.position - Source) * KnockbackForce + new Vector3(0, KnockbackForce);
             if (RB.velocity.x < 0)
