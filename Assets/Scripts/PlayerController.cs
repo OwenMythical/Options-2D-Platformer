@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
@@ -70,7 +71,6 @@ public class PlayerController : MonoBehaviour
         {
             XAxis = -1;
         }
-        Debug.Log(XAxis);
 
         //Walking + Sliding
         if (SuperLeaping == false && Stunned == false)
@@ -117,7 +117,9 @@ public class PlayerController : MonoBehaviour
             }
             RB.velocity = new Vector2(XAxis * MovementSpeed * SuperJumpMultiplier * SuperChargeMultiplier * StunMultiplier, RB.velocity.y);
             var Main = PS.main;
-            Main.startSpeed = Mathf.Clamp(3 * SuperJumpMultiplier * SuperChargeMultiplier,1.5f,3);
+            var Emission = PS.emission;
+            Main.startSpeed = Mathf.Clamp(3 * SuperJumpMultiplier * SuperChargeMultiplier,2f,3f);
+            Emission.rateOverTime = Mathf.Clamp(25 * SuperJumpMultiplier * SuperChargeMultiplier, 15f, 25f);
         }
 
         //Jumping
@@ -133,7 +135,7 @@ public class PlayerController : MonoBehaviour
                 BC.size = new Vector2(0.6f, 0.6f);
                 StartCoroutine(AudioPlay(SuperJumpSound, 1f));
 
-                if (Mathf.Abs(XAxis) == 1 && SuperChargeMultiplier == 1)
+                if (Mathf.Abs(XAxis) > 0.75f && SuperChargeMultiplier == 1)
                 {
                     SuperLeaping = true;
                     SuperJumpMultiplier = 0.25f;
@@ -158,7 +160,7 @@ public class PlayerController : MonoBehaviour
             {
                 StartCoroutine(RestoreSuperJumpSpeed());
             }
-            else if (RB.velocity.x < 1.5f)
+            else if (Mathf.Abs(RB.velocity.x) < 1.5f)
             {
                 StartCoroutine(RestoreSuperJumpSpeed());
             }
@@ -178,7 +180,7 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.W) == true && Mathf.Approximately(RB.velocity.y, 0f) == true && (GroundChecker.IsTouching(CollideMap) || GroundChecker.IsTouching(OneWayMap)))
         {
-            Cam.transform.position = new Vector3(Cam.transform.position.x, Mathf.Lerp(Cam.transform.position.y, gameObject.transform.position.y + 1.5f, 0.01f), -10);
+            Cam.transform.position = new Vector3(Cam.transform.position.x, Mathf.Lerp(Cam.transform.position.y, gameObject.transform.position.y + 1.5f, 5f * Time.deltaTime), -10);
             SuperChargeMultiplier = 0.25f;
 
             if (SuperJumpTimer < 3)
@@ -200,12 +202,19 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.S) == true && Mathf.Approximately(RB.velocity.y, 0f) == true && (GroundChecker.IsTouching(CollideMap) || GroundChecker.IsTouching(OneWayMap)))
         {
-            Cam.transform.position = new Vector3(Cam.transform.position.x, Mathf.Lerp(Cam.transform.position.y, gameObject.transform.position.y - 1.5f, 0.01f), -10);
+            Cam.transform.position = new Vector3(Cam.transform.position.x, Mathf.Lerp(Cam.transform.position.y, gameObject.transform.position.y - 1.5f, 5f * Time.deltaTime), -10);
             SuperChargeMultiplier = 0.25f;
         }
-        if (Input.GetKey(KeyCode.W) == false && Input.GetKey(KeyCode.S) == false || Mathf.Approximately(RB.velocity.y, 0f) == false)
+        if (Input.GetKey(KeyCode.W) == false && Input.GetKey(KeyCode.S) == false)
         {
-            Cam.transform.position = new Vector3(Cam.transform.position.x, Mathf.Lerp(Cam.transform.position.y, gameObject.transform.position.y, 0.01f), -10);
+            if (SuperJumping == true)
+            {
+                Cam.transform.position = new Vector3(Cam.transform.position.x, Mathf.Lerp(Cam.transform.position.y, gameObject.transform.position.y, 5f * Time.deltaTime), -10);
+            }
+            else
+            {
+                Cam.transform.position = new Vector3(Cam.transform.position.x, Mathf.Lerp(Cam.transform.position.y, gameObject.transform.position.y, 7.5f * Time.deltaTime), -10);
+            }
             SuperChargeMultiplier = 1f;
         }
 

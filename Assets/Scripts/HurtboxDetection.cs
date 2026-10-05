@@ -8,6 +8,7 @@ public class HurtboxDetection : MonoBehaviour
     public int ScoreOnDeath;
     public GameObject Hitbox;
     public GameObject Parent;
+    public ParticleSystem PS;
     bool Cooldown;
     SpriteRenderer SR;
     Rigidbody2D RB;
@@ -44,12 +45,14 @@ public class HurtboxDetection : MonoBehaviour
             {
                 RSM.enabled = false;
                 BC.enabled = false;
+                RSM.Dead = true;
                 SM.ScoreChange(ScoreOnDeath);
                 StartCoroutine(AudioPlay(DeathSound, 1f));
                 byte R = (byte)(SR.color.r * 150);
                 byte G = (byte)(SR.color.g * 150);
                 byte B = (byte)(SR.color.b * 150);
                 RB.velocity = new Vector2(0,3);
+                PS.Stop();
                 byte A = 255;
                 for (int i = 1; i < 10; i++)
                 {
