@@ -41,22 +41,30 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        RB = gameObject.GetComponent<Rigidbody2D>();
-        AN = gameObject.GetComponent<Animator>();
-        SR = gameObject.GetComponent<SpriteRenderer>();
-        BC = gameObject.GetComponent<BoxCollider2D>();
-        AS = gameObject.GetComponent<AudioSource>();
+        GameObject[] objs = GameObject.FindGameObjectsWithTag("Player");
+        if (objs.Length > 1)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            RB = gameObject.GetComponent<Rigidbody2D>();
+            AN = gameObject.GetComponent<Animator>();
+            SR = gameObject.GetComponent<SpriteRenderer>();
+            BC = gameObject.GetComponent<BoxCollider2D>();
+            AS = gameObject.GetComponent<AudioSource>();
 
-        CollideMap = GameObject.FindGameObjectWithTag("CollideMap").GetComponent<CompositeCollider2D>();
-        OneWayMap = GameObject.FindGameObjectWithTag("OneWayMap").GetComponent<CompositeCollider2D>();
-
-        StartCoroutine(SuperJumpFlicker());
+            StartCoroutine(SuperJumpFlicker());
+        }
     }
 
     float XAxis = 0f;
     float Smoothing = 0.05f;
     void Update()
     {
+        CollideMap = GameObject.FindGameObjectWithTag("CollideMap").GetComponent<CompositeCollider2D>();
+        OneWayMap = GameObject.FindGameObjectWithTag("OneWayMap").GetComponent<CompositeCollider2D>();
+
         float XAxisRaw = Input.GetAxisRaw("Horizontal");
         XAxis = Mathf.Lerp(XAxis, XAxisRaw, Smoothing);
         if (XAxis < 0.1f && XAxis > -0.1f && XAxisRaw == 0)

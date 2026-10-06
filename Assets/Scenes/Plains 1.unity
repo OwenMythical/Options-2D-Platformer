@@ -3770,8 +3770,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91958b3495f020f4387ab24e41e20fbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentScene: 
-  TransitionPos: {x: 0, y: 0, z: 0}
+  TransitionPos: {x: -3, y: -0.5, z: 0}
 --- !u!1001 &482053251
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9764,7 +9763,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0fcbc6a7368b7a43b2e8ac760fc6630, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 244405476}
   XSpeed: 25
   YSpeed: 0
 --- !u!483693784 &1112717984
@@ -64538,7 +64536,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0fcbc6a7368b7a43b2e8ac760fc6630, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 244405476}
   XSpeed: 5
   YSpeed: 0
 --- !u!483693784 &1650348583

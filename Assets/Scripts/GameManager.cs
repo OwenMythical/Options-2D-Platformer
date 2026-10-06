@@ -8,8 +8,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public string CurrentScene = "Plains 1";
-    public Vector3 TransitionPos = new Vector3(0, 0, 0);
+    GameObject Player;
+    public Vector3 TransitionPos = new Vector3(-3, 0.5f, 0);
 
     private void Start()
     {
@@ -18,15 +18,19 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        else
+        {
+            Player = GameObject.FindGameObjectWithTag("Player");
+            DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(Player);
 
-        GameObject Player = GameObject.FindGameObjectWithTag("Player");
-        Player = GameObject.FindGameObjectWithTag("Player");
-        DontDestroyOnLoad(gameObject);
+            SaveManager.Load();
+        }
     }
 
     public void Save(ref GameSaveData Data)
     {
-        Data.SceneName = CurrentScene;
+        Data.SceneName = SceneManager.GetActiveScene().name;
         Data.TransitionPos = TransitionPos;
         Debug.Log(Data.SceneName);
         Debug.Log(Data.TransitionPos);
@@ -34,16 +38,22 @@ public class GameManager : MonoBehaviour
 
     public void Load(GameSaveData Data)
     {
-        SceneManager.LoadScene(Data.SceneName);
-        StartCoroutine(LoadPlayerPos(Data.TransitionPos));
+        if (Data.SceneName == "")
+        {
+            SceneManager.LoadScene("Plains 1");
+        }
+        else
+        {
+            SceneManager.LoadScene(Data.SceneName);
+        }
+        StartCoroutine(LoadScene(Data.TransitionPos));
         Debug.Log(Data.SceneName);
         Debug.Log(Data.TransitionPos);
     }
 
-    IEnumerator LoadPlayerPos(Vector3 Pos)
+    IEnumerator LoadScene(Vector3 Pos)
     {
         yield return new WaitForSeconds(0f);
-        GameObject Player = GameObject.FindGameObjectWithTag("Player");
         Player.transform.position = Pos;
     }
 
@@ -53,13 +63,7 @@ public class GameManager : MonoBehaviour
         {
             SaveManager.Save();
         }
-        if (Input.GetKeyDown(KeyCode.Alpha9))
-        {
-            SaveManager.Load();
-        }
     }
-
-    public PlayerController PC {get; set;}
 }
 
 [System.Serializable]

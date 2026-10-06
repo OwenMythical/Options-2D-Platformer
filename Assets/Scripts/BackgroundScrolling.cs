@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class BackgroundScrolling : MonoBehaviour
 {
-    public GameObject Player;
+    GameObject Player;
     public float XSpeed;
     public float YSpeed;
 
     // Update is called once per frame
     void Update()
     {
+        Player = GameObject.FindGameObjectWithTag("Player");
+
         if (XSpeed == 0)
         {
             XSpeed = Mathf.Infinity;
