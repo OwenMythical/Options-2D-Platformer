@@ -102,6 +102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Value: 1
+  Pitch: 1
 --- !u!95 &5293370811002326881
 Animator:
   serializedVersion: 5

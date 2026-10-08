@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class CoinScript : MonoBehaviour
 {
     public int Value;
+    public float Pitch;
     bool Collected = false;
 
     GameObject Player;
@@ -43,7 +44,7 @@ public class CoinScript : MonoBehaviour
             AN.speed = 5;
             RB.bodyType = RigidbodyType2D.Dynamic;
             RB.velocity = new Vector2(0, 3);
-            AS.pitch = 1f + UnityEngine.Random.Range(-0.05f, 0.05f);
+            AS.pitch = Pitch + UnityEngine.Random.Range(-0.05f, 0.05f);
             AS.Play();
             byte A = 255;
             for (int i = 1; i < 10; i++)

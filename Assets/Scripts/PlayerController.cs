@@ -227,7 +227,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //Misc
-        RB.velocity = new Vector2(RB.velocity.x, Mathf.Clamp(RB.velocity.y, -10f, 10f));
+        RB.velocity = new Vector2(RB.velocity.x, Mathf.Clamp(RB.velocity.y, -25f, 25f));
         AN.SetFloat("YVelocity", Mathf.RoundToInt(RB.velocity.y));
         if (Mathf.Approximately(RB.velocity.y, 0f) == false)
         {

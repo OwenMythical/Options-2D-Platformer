@@ -9,6 +9,7 @@ public class RedSlimeMovement : MonoBehaviour
     public float XSpeed;
     public bool Dead;
     public GameObject TileChecker;
+    public GameObject WallTileChecker;
     public ParticleSystem PS;
     Tilemap TM;
     Rigidbody2D RB;
@@ -40,21 +41,11 @@ public class RedSlimeMovement : MonoBehaviour
                 RB.velocity = new Vector2(-XSpeed, 0);
             }
 
-            if (RB.velocity.x == 0)
-            {
-                if (gameObject.transform.rotation.y == 0)
-                {
-                    gameObject.transform.rotation = new Quaternion(0, 180, 0, 0);
-                }
-                else
-                {
-                    gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
-                }
-            }
-
             Vector3Int Position = Vector3Int.FloorToInt(TileChecker.transform.position);
             TileBase T = TM.GetTile(Position);
-            if (T == null)
+            Vector3Int Position2 = Vector3Int.FloorToInt(WallTileChecker.transform.position);
+            TileBase T2 = TM.GetTile(Position2);
+            if (T == null || T2 != null)
             {
                 StartCoroutine(WaitBeforeTurning());
             }
