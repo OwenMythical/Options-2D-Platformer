@@ -9,7 +9,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     GameObject Player;
-    public Vector3 TransitionPos = new Vector3(-3, 0.5f, 0);
+    public string SceneName = "Plains 1";
+    public int SpawnID = -1;
 
     private void Start()
     {
@@ -30,10 +31,10 @@ public class GameManager : MonoBehaviour
 
     public void Save(ref GameSaveData Data)
     {
-        Data.SceneName = SceneManager.GetActiveScene().name;
-        Data.TransitionPos = TransitionPos;
+        Data.SceneName = SceneName;
+        Data.SpawnID = SpawnID;
         Debug.Log(Data.SceneName);
-        Debug.Log(Data.TransitionPos);
+        Debug.Log(Data.SpawnID);
     }
 
     public void Load(GameSaveData Data)
@@ -46,21 +47,46 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadScene(Data.SceneName);
         }
-        StartCoroutine(LoadScene(Data.TransitionPos));
+        StartCoroutine(LoadScene(Data.SpawnID));
         Debug.Log(Data.SceneName);
-        Debug.Log(Data.TransitionPos);
+        Debug.Log(Data.SpawnID);
     }
 
-    IEnumerator LoadScene(Vector3 Pos)
+    IEnumerator LoadScene(int ID)
     {
         yield return new WaitForSeconds(0f);
-        Player.transform.position = Pos;
+        GameObject SpawnObject = null;
+        foreach (GameObject SObj in GameObject.FindGameObjectsWithTag("SpawnObject"))
+        {
+            if (SObj.GetComponent<TransitionScript>().ID == ID)
+            {
+                SpawnObject = SObj;
+            }
+        }
+        if (SpawnObject == null)
+        {
+            SpawnObject = GameObject.FindGameObjectWithTag("DefaultSpawnObject");
+        }
+        Player.transform.position = SpawnObject.transform.position;
     }
 
-    private void Update()
+    public void SceneTransition(string Scene, int ID)
+    {
+        SceneManager.LoadScene(Scene);
+        StartCoroutine(LoadScene(ID));
+        SceneName = Scene;
+        SpawnID = ID;
+        SaveManager.Save();
+    }
+
+    void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha0))
         {
+            SceneManager.LoadScene("Plains 1");
+            StartCoroutine(LoadScene(-1));
+            SceneName = "Plains 1";
+            SpawnID = -1;
             SaveManager.Save();
         }
     }
@@ -70,5 +96,5 @@ public class GameManager : MonoBehaviour
 public struct GameSaveData
 {
     public string SceneName;
-    public Vector3 TransitionPos;
+    public int SpawnID;
 }
