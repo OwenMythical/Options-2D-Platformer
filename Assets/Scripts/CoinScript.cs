@@ -18,6 +18,7 @@ public class CoinScript : MonoBehaviour
     Rigidbody2D RB;
     SpriteRenderer SR;
     AudioSource AS;
+    Collider2D C2D;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +30,7 @@ public class CoinScript : MonoBehaviour
         RB = gameObject.GetComponent<Rigidbody2D>();
         SR = gameObject.GetComponent<SpriteRenderer>();
         AS = gameObject.GetComponent<AudioSource>();
+        C2D = gameObject.GetComponent<Collider2D>();
     }
 
     private IEnumerator OnTriggerEnter2D(Collider2D collision)
@@ -53,7 +55,8 @@ public class CoinScript : MonoBehaviour
                 yield return new WaitForSeconds(0.05f);
                 SR.color = new Color32(R,G,B,A);
             }
-            GameObject.Destroy(gameObject);
+            SR.enabled = false;
+            C2D.enabled = false;
         }
     }
 }

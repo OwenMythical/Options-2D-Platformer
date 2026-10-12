@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     PlayerController PC;
     public string SceneName = "Plains 1";
     public int SpawnID = -1;
-    public List<int> CollectedCoins = new List<int>();
+    public List<GlobalObjectId> CollectedCoins = new List<GlobalObjectId>();
 
     public AudioClip PlainsClip;
     public AudioClip ForestClip;
@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
     {
         Coins += Value;
         CoinCounter.text = Coins.ToString();
-        int ID = Coin.GetInstanceID();
+        GlobalObjectId ID = GlobalObjectId.GetGlobalObjectIdSlow(Coin);
         CollectedCoins.Add(ID);
     }
 
@@ -67,11 +67,7 @@ public class GameManager : MonoBehaviour
         Data.SpawnID = SpawnID;
         Data.Score = Score;
         Data.Coins = Coins;
-        Debug.Log("Saving");
         Debug.Log(Data.SceneName);
-        Debug.Log(Data.SpawnID);
-        Debug.Log(Data.Score);
-        Debug.Log(Data.Coins);
     }
 
     public void Load(GameSaveData Data)
@@ -83,11 +79,7 @@ public class GameManager : MonoBehaviour
         Coins = Data.Coins;
         CoinCounter.text = Coins.ToString();
         StartCoroutine(LoadScene(Data.SpawnID, Data.SceneName, true));
-        Debug.Log("Loading");
         Debug.Log(Data.SceneName);
-        Debug.Log(Data.SpawnID);
-        Debug.Log(Data.Score);
-        Debug.Log(Data.Coins);
     }
 
     IEnumerator LoadScene(int ID, string Scene, bool InstantTransition)
@@ -159,9 +151,13 @@ public class GameManager : MonoBehaviour
         {
             foreach (GameObject C in GameObject.FindGameObjectsWithTag("Coin"))
             {
-                if (CollectedCoins.Contains(C.GetInstanceID()))
+                foreach (GlobalObjectId CID in CollectedCoins)
                 {
-                    GameObject.Destroy(C);
+                    if (CID.Equals(GlobalObjectId.GetGlobalObjectIdSlow(C)))
+                    {
+                        C.GetComponent<SpriteRenderer>().enabled = false;
+                        C.GetComponent<Collider2D>().enabled = false;
+                    }
                 }
             }
         }
@@ -186,7 +182,15 @@ public class GameManager : MonoBehaviour
     {
         SceneName = Scene;
         SpawnID = ID;
-        CollectedCoins = new List<int>();
+        CollectedCoins = new List<GlobalObjectId>();
+        foreach (GameObject C in GameObject.FindGameObjectsWithTag("Coin"))
+        {
+            if (C.GetComponent<SpriteRenderer>().enabled == false)
+            {
+                GlobalObjectId CID = GlobalObjectId.GetGlobalObjectIdSlow(C);
+                CollectedCoins.Add(CID);
+            }
+        }
         PC.Health = PC.MaxHealth;
         SaveManager.Save();
     }
@@ -197,7 +201,7 @@ public class GameManager : MonoBehaviour
         {
             SceneName = "Plains 1";
             SpawnID = -1;
-            CollectedCoins = new List<int>();
+            CollectedCoins = new List<GlobalObjectId>();
             Coins = 0;
             Score = 0;
             StartCoroutine(LoadScene(-1,"Plains 1",true));
