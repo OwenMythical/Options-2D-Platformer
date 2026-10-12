@@ -52394,9 +52394,9 @@ Tilemap:
       e03: 0
       e10: -0.99999994
       e11: 0.000000059604645
-      e12: 0
+      e12: -0
       e13: 0
-      e20: 0
+      e20: -0
       e21: 0
       e22: 1
       e23: 0
@@ -52408,14 +52408,14 @@ Tilemap:
     m_Data:
       e00: 0.000000059604645
       e01: -0.99999994
-      e02: 0
+      e02: -0
       e03: 0
       e10: 0.99999994
       e11: 0.000000059604645
       e12: 0
       e13: 0
       e20: 0
-      e21: 0
+      e21: -0
       e22: 1
       e23: 0
       e30: 0
@@ -53479,7 +53479,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5845330021069691364, guid: aa7a2158fb2115240bd7e6bb0d33d443, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5845330021069691364, guid: aa7a2158fb2115240bd7e6bb0d33d443, type: 3}
       propertyPath: m_SizeDelta.y
@@ -53591,7 +53591,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5845330021069691364, guid: aa7a2158fb2115240bd7e6bb0d33d443, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5845330021069691364, guid: aa7a2158fb2115240bd7e6bb0d33d443, type: 3}
       propertyPath: m_SizeDelta.y
@@ -154425,7 +154425,9 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 575745138850227577, guid: aa7a2158fb2115240bd7e6bb0d33d443, type: 3}
       propertyPath: m_text
-      value: 'Danger: Keep Out!'
+      value: 'Danger
+
+        Keep Out!'
       objectReference: {fileID: 0}
     - target: {fileID: 575745138850227577, guid: aa7a2158fb2115240bd7e6bb0d33d443, type: 3}
       propertyPath: m_fontSize
@@ -154473,7 +154475,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5845330021069691364, guid: aa7a2158fb2115240bd7e6bb0d33d443, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5845330021069691364, guid: aa7a2158fb2115240bd7e6bb0d33d443, type: 3}
       propertyPath: m_SizeDelta.y
@@ -166529,7 +166531,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5845330021069691364, guid: aa7a2158fb2115240bd7e6bb0d33d443, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5845330021069691364, guid: aa7a2158fb2115240bd7e6bb0d33d443, type: 3}
       propertyPath: m_SizeDelta.y
