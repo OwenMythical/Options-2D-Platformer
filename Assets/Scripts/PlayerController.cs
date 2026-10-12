@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
@@ -295,7 +296,13 @@ public class PlayerController : MonoBehaviour
             Stunned = true;
             AN.SetBool("Stunned", true);
             StartCoroutine(AudioPlay(HurtSound, 1f));
-            Health -= Value;
+
+            Health -= Value; //Needs a proper death animation and to not just quit the application!!!
+            if (Health <= 0)
+            {
+                Application.Quit();
+            }
+
             RB.velocity = (gameObject.transform.position - Source) * KnockbackForce + new Vector3(0, KnockbackForce);
             if (RB.velocity.x < 0)
             {
