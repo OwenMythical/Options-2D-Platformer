@@ -5,16 +5,20 @@ using TMPro;
 using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     GameObject Player;
+    PlayerController PC;
     public string SceneName = "Plains 1";
     public int SpawnID = -1;
 
     public AudioClip PlainsClip;
     public AudioClip ForestClip;
     AudioSource AS;
+
+    public Image TransitionUI;
 
     private void Start()
     {
@@ -26,6 +30,7 @@ public class GameManager : MonoBehaviour
         else
         {
             Player = GameObject.FindGameObjectWithTag("Player");
+            PC = Player.GetComponent<PlayerController>();
             AS = gameObject.GetComponent<AudioSource>();
             DontDestroyOnLoad(gameObject);
             DontDestroyOnLoad(Player);
@@ -44,21 +49,37 @@ public class GameManager : MonoBehaviour
 
     public void Load(GameSaveData Data)
     {
-        if (Data.SceneName == "")
+        SceneName = Data.SceneName;
+        SpawnID = Data.SpawnID;
+        StartCoroutine(LoadScene(Data.SpawnID,Data.SceneName,true));
+        Debug.Log(Data.SceneName);
+        Debug.Log(Data.SpawnID);
+    }
+
+    IEnumerator LoadScene(int ID, string Scene, bool InstantTransition)
+    {
+        byte A = 0;
+        if (InstantTransition == false)
+        {
+            A = 0;
+            for (int i = 0; i < 10; i++)
+            {
+                A += 25;
+                TransitionUI.color = new Color32(0, 0, 0, A);
+                yield return new WaitForSeconds(0.1f);
+            }
+        }
+        TransitionUI.color = new Color32(0, 0, 0, 255);
+
+        PC.TransitionStun = true;
+        if (Scene == "")
         {
             SceneManager.LoadScene("Plains 1");
         }
         else
         {
-            SceneManager.LoadScene(Data.SceneName);
+            SceneManager.LoadScene(Scene);
         }
-        StartCoroutine(LoadScene(Data.SpawnID));
-        Debug.Log(Data.SceneName);
-        Debug.Log(Data.SpawnID);
-    }
-
-    IEnumerator LoadScene(int ID)
-    {
         yield return new WaitForSeconds(0f);
         GameObject SpawnObject = null;
         foreach (GameObject SObj in GameObject.FindGameObjectsWithTag("SpawnObject"))
@@ -90,12 +111,21 @@ public class GameManager : MonoBehaviour
                 AS.Play();
             }
         }
+
+        A = 255;
+        for (int i = 10; i > 0; i--)
+        {
+            A -= 25;
+            TransitionUI.color = new Color32(0, 0, 0, A);
+            yield return new WaitForSeconds(0.1f);
+        }
+        TransitionUI.color = new Color32(0, 0, 0, 0);
+        PC.TransitionStun = false;
     }
 
     public void SceneTransition(string Scene, int ID)
     {
-        SceneManager.LoadScene(Scene);
-        StartCoroutine(LoadScene(ID));
+        StartCoroutine(LoadScene(ID,Scene,false));
         SceneName = Scene;
         SpawnID = ID;
         SaveManager.Save();
@@ -105,10 +135,9 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha0))
         {
-            SceneManager.LoadScene("Plains 1");
-            StartCoroutine(LoadScene(-1));
             SceneName = "Plains 1";
             SpawnID = -1;
+            StartCoroutine(LoadScene(-1,"Plains 1",true));
             SaveManager.Save();
         }
     }

@@ -13,5 +13,8 @@ EditorBuildSettings:
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
     path: Assets/Scenes/Plains 2.unity
-    guid: 06a0b9b05dc40d143a04915736bc2f15
+    guid: b85a89e1d8ca2d0479e532ee63f04e88
+  - enabled: 1
+    path: Assets/Scenes/Forest 1.unity
+    guid: c7f29a8c9f65c804fb76ccf0b44d7301
   m_configObjects: {}

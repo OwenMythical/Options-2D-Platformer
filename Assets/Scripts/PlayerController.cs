@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     public bool Stunned = false;
     float StunMultiplier = 1;
     public float KnockbackForce;
+    public bool TransitionStun = false;
 
     Rigidbody2D RB;
     Animator AN;
@@ -82,7 +83,7 @@ public class PlayerController : MonoBehaviour
         float YAxisRaw = Input.GetAxisRaw("Vertical");
 
         //Walking + Sliding
-        if (SuperLeaping == false && Stunned == false)
+        if (SuperLeaping == false && Stunned == false && TransitionStun == false)
         {
             if (XAxis > 0 && XAxisRaw == 1)
             {
@@ -129,6 +130,14 @@ public class PlayerController : MonoBehaviour
             var Emission = PS.emission;
             Main.startSpeed = Mathf.Clamp(3 * SuperJumpMultiplier * SuperChargeMultiplier,2f,3f);
             Emission.rateOverTime = Mathf.Clamp(25 * SuperJumpMultiplier * SuperChargeMultiplier, 15f, 25f);
+        }
+        if (TransitionStun == true)
+        {
+            RB.velocity = new Vector2(0, 0);
+            AN.SetBool("Walking", false);
+            AN.SetBool("Sliding", false);
+            AN.SetBool("SuperJumping", false);
+            PS.Stop();
         }
 
         //Jumping
