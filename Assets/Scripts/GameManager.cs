@@ -12,6 +12,10 @@ public class GameManager : MonoBehaviour
     public string SceneName = "Plains 1";
     public int SpawnID = -1;
 
+    public AudioClip PlainsClip;
+    public AudioClip ForestClip;
+    AudioSource AS;
+
     private void Start()
     {
         GameObject[] objs = GameObject.FindGameObjectsWithTag("GameController");
@@ -22,6 +26,7 @@ public class GameManager : MonoBehaviour
         else
         {
             Player = GameObject.FindGameObjectWithTag("Player");
+            AS = gameObject.GetComponent<AudioSource>();
             DontDestroyOnLoad(gameObject);
             DontDestroyOnLoad(Player);
 
@@ -68,6 +73,23 @@ public class GameManager : MonoBehaviour
             SpawnObject = GameObject.FindGameObjectWithTag("DefaultSpawnObject");
         }
         Player.transform.position = SpawnObject.transform.position;
+
+        if (SceneName.Contains("Plains"))
+        {
+            if (AS.clip != PlainsClip)
+            {
+                AS.clip = PlainsClip;
+                AS.Play();
+            }
+        }
+        if (SceneName.Contains("Forest"))
+        {
+            if (AS.clip != ForestClip)
+            {
+                AS.clip = ForestClip;
+                AS.Play();
+            }
+        }
     }
 
     public void SceneTransition(string Scene, int ID)

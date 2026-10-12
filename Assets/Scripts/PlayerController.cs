@@ -79,6 +79,7 @@ public class PlayerController : MonoBehaviour
         {
             XAxis = -1;
         }
+        float YAxisRaw = Input.GetAxisRaw("Vertical");
 
         //Walking + Sliding
         if (SuperLeaping == false && Stunned == false)
@@ -182,11 +183,11 @@ public class PlayerController : MonoBehaviour
         }
 
         //Up and Down
-        if (Input.GetKeyDown(KeyCode.W) && Mathf.Approximately(RB.velocity.y, 0f) == true && (GroundChecker.IsTouching(CollideMap) || GroundChecker.IsTouching(OneWayMap)))
+        if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) && Mathf.Approximately(RB.velocity.y, 0f) == true && (GroundChecker.IsTouching(CollideMap) || GroundChecker.IsTouching(OneWayMap)))
         {
             SuperJumpTimer = 0;
         }
-        if (Input.GetKey(KeyCode.W) == true && Mathf.Approximately(RB.velocity.y, 0f) == true && (GroundChecker.IsTouching(CollideMap) || GroundChecker.IsTouching(OneWayMap)))
+        if (YAxisRaw == 1 && Mathf.Approximately(RB.velocity.y, 0f) == true && (GroundChecker.IsTouching(CollideMap) || GroundChecker.IsTouching(OneWayMap)))
         {
             Cam.transform.position = new Vector3(Cam.transform.position.x, Mathf.Lerp(Cam.transform.position.y, gameObject.transform.position.y + 1.5f, 5f * Time.deltaTime), -10);
             SuperChargeMultiplier = 0.25f;
@@ -208,12 +209,12 @@ public class PlayerController : MonoBehaviour
                 SuperJumpTimer = 0;
             }
         }
-        if (Input.GetKey(KeyCode.S) == true && Mathf.Approximately(RB.velocity.y, 0f) == true && (GroundChecker.IsTouching(CollideMap) || GroundChecker.IsTouching(OneWayMap)))
+        if (YAxisRaw == -1 && Mathf.Approximately(RB.velocity.y, 0f) == true && (GroundChecker.IsTouching(CollideMap) || GroundChecker.IsTouching(OneWayMap)))
         {
             Cam.transform.position = new Vector3(Cam.transform.position.x, Mathf.Lerp(Cam.transform.position.y, gameObject.transform.position.y - 1.5f, 5f * Time.deltaTime), -10);
             SuperChargeMultiplier = 0.25f;
         }
-        if (Input.GetKey(KeyCode.W) == false && Input.GetKey(KeyCode.S) == false)
+        if (YAxisRaw == 0)
         {
             if (SuperJumping == true)
             {
