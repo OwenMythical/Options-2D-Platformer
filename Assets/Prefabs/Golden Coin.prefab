@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 5368150283360783249}
   m_Layer: 0
   m_Name: Golden Coin
-  m_TagString: Untagged
+  m_TagString: Coin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1972647309194277000}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 45.060806, y: -26.475746, z: -0.023264425}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -1173959427, guid: 88a125ec7b9b8aa4d9b969e289f693fb, type: 3}
-  m_Color: {r: 1, g: 0.5882353, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.5882353, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -101,8 +101,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6245c36e8ec32dd428f13ce497983d46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Value: 5
-  Pitch: 0.75
+  Value: 25
+  Pitch: 0.5
 --- !u!95 &8853373372868709526
 Animator:
   serializedVersion: 5

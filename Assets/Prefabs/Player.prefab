@@ -5176,6 +5176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 5
+  MaxHealth: 5
   JumpHeight: 5
   SuperJumpHeight: 9.5
   MovementSpeed: 5
@@ -5185,6 +5186,7 @@ MonoBehaviour:
   PhysicsObj: {fileID: 6200000, guid: a7f54246b8865c242a868f36d1db92a4, type: 2}
   Stunned: 0
   KnockbackForce: 5
+  TransitionStun: 0
   ChargedSound: {fileID: 8300000, guid: 724f9231bcf220341b378597ef779d03, type: 3}
   JumpSound: {fileID: 8300000, guid: 6000985cf19ff414f811fec41105ad9b, type: 3}
   SuperJumpSound: {fileID: 8300000, guid: 2bf337e62b1f51a48b2165b118bcd119, type: 3}

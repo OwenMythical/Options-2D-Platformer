@@ -13,7 +13,7 @@ public class CoinScript : MonoBehaviour
 
     GameObject Player;
     GameObject GameController;
-    StatManager SM;
+    GameManager GM;
     Animator AN;
     Rigidbody2D RB;
     SpriteRenderer SR;
@@ -24,7 +24,7 @@ public class CoinScript : MonoBehaviour
     {
         Player = GameObject.FindGameObjectWithTag("Player");
         GameController = GameObject.FindGameObjectWithTag("GameController");
-        SM = GameController.GetComponent<StatManager>();
+        GM = GameController.GetComponent<GameManager>();
         AN = gameObject.GetComponent<Animator>();
         RB = gameObject.GetComponent<Rigidbody2D>();
         SR = gameObject.GetComponent<SpriteRenderer>();
@@ -39,8 +39,8 @@ public class CoinScript : MonoBehaviour
             byte G = (byte)(SR.color.g * 150);
             byte B = (byte)(SR.color.b * 150);
             Collected = true;
-            SM.CoinCollect(Value);
-            SM.ScoreChange(Value * 50);
+            GM.CoinCollect(Value,gameObject);
+            GM.ScoreChange(Value * 50);
             AN.speed = 5;
             RB.bodyType = RigidbodyType2D.Dynamic;
             RB.velocity = new Vector2(0, 3);

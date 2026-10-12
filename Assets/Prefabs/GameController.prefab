@@ -613,7 +613,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4647573813593222681}
   - component: {fileID: 8292229343814661233}
-  - component: {fileID: 5304770423809960660}
   - component: {fileID: 6492634196816349289}
   - component: {fileID: 3912334896019561867}
   m_Layer: 0
@@ -735,22 +734,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &5304770423809960660
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9097237796581860930}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9f99be26f857464ab7513a2efe4154e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Coins: 0
-  Score: 0
-  CoinCounter: {fileID: 1131743378462277200}
-  ScoreCounter: {fileID: 7815820013366692108}
 --- !u!169 &6492634196816349289
 AudioLowPassFilter:
   m_ObjectHideFlags: 0
@@ -792,4 +775,8 @@ MonoBehaviour:
   SpawnID: -1
   PlainsClip: {fileID: 8300000, guid: bcd9d7b7d2a285945992b3e0c639bac1, type: 3}
   ForestClip: {fileID: 8300000, guid: 462c8643d0ac22f49ad965424fbe8aed, type: 3}
+  Coins: 0
+  Score: 0
+  CoinCounter: {fileID: 1131743378462277200}
+  ScoreCounter: {fileID: 7815820013366692108}
   TransitionUI: {fileID: 6477631185081769755}

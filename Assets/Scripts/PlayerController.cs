@@ -8,6 +8,7 @@ using UnityEngine.UIElements;
 public class PlayerController : MonoBehaviour
 {
     public int Health;
+    public int MaxHealth;
     public float JumpHeight;
     public float SuperJumpHeight;
     public float MovementSpeed;

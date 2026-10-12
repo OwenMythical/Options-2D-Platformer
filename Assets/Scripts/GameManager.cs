@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
+using UnityEditor;
 using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,14 +15,20 @@ public class GameManager : MonoBehaviour
     PlayerController PC;
     public string SceneName = "Plains 1";
     public int SpawnID = -1;
+    public List<int> CollectedCoins = new List<int>();
 
     public AudioClip PlainsClip;
     public AudioClip ForestClip;
     AudioSource AS;
 
+    public int Coins = 0;
+    public int Score = 0;
+    public TextMeshProUGUI CoinCounter;
+    public TextMeshProUGUI ScoreCounter;
+
     public Image TransitionUI;
 
-    private void Start()
+    void Start()
     {
         GameObject[] objs = GameObject.FindGameObjectsWithTag("GameController");
         if (objs.Length > 1)
@@ -39,21 +47,47 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void CoinCollect(int Value, GameObject Coin)
+    {
+        Coins += Value;
+        CoinCounter.text = Coins.ToString();
+        int ID = Coin.GetInstanceID();
+        CollectedCoins.Add(ID);
+    }
+
+    public void ScoreChange(int Value)
+    {
+        Score += Value;
+        ScoreCounter.text = Score.ToString();
+    }
+
     public void Save(ref GameSaveData Data)
     {
         Data.SceneName = SceneName;
         Data.SpawnID = SpawnID;
+        Data.Score = Score;
+        Data.Coins = Coins;
+        Debug.Log("Saving");
         Debug.Log(Data.SceneName);
         Debug.Log(Data.SpawnID);
+        Debug.Log(Data.Score);
+        Debug.Log(Data.Coins);
     }
 
     public void Load(GameSaveData Data)
     {
         SceneName = Data.SceneName;
         SpawnID = Data.SpawnID;
-        StartCoroutine(LoadScene(Data.SpawnID,Data.SceneName,true));
+        Score = Data.Score;
+        ScoreCounter.text = Score.ToString();
+        Coins = Data.Coins;
+        CoinCounter.text = Coins.ToString();
+        StartCoroutine(LoadScene(Data.SpawnID, Data.SceneName, true));
+        Debug.Log("Loading");
         Debug.Log(Data.SceneName);
         Debug.Log(Data.SpawnID);
+        Debug.Log(Data.Score);
+        Debug.Log(Data.Coins);
     }
 
     IEnumerator LoadScene(int ID, string Scene, bool InstantTransition)
@@ -72,6 +106,7 @@ public class GameManager : MonoBehaviour
         TransitionUI.color = new Color32(0, 0, 0, 255);
 
         PC.TransitionStun = true;
+        //Scene Loading
         if (Scene == "")
         {
             SceneManager.LoadScene("Plains 1");
@@ -81,10 +116,18 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene(Scene);
         }
         yield return new WaitForSeconds(0f);
+        //Player Position
         GameObject SpawnObject = null;
         foreach (GameObject SObj in GameObject.FindGameObjectsWithTag("SpawnObject"))
         {
             if (SObj.GetComponent<TransitionScript>().ID == ID)
+            {
+                SpawnObject = SObj;
+            }
+        }
+        foreach (GameObject SObj in GameObject.FindGameObjectsWithTag("SaveObject"))
+        {
+            if (SObj.GetComponent<SaveScript>().ID == ID)
             {
                 SpawnObject = SObj;
             }
@@ -94,8 +137,8 @@ public class GameManager : MonoBehaviour
             SpawnObject = GameObject.FindGameObjectWithTag("DefaultSpawnObject");
         }
         Player.transform.position = SpawnObject.transform.position;
-
-        if (SceneName.Contains("Plains"))
+        //Music
+        if (Scene.Contains("Plains"))
         {
             if (AS.clip != PlainsClip)
             {
@@ -103,12 +146,23 @@ public class GameManager : MonoBehaviour
                 AS.Play();
             }
         }
-        if (SceneName.Contains("Forest"))
+        if (Scene.Contains("Forest"))
         {
             if (AS.clip != ForestClip)
             {
                 AS.clip = ForestClip;
                 AS.Play();
+            }
+        }
+        //Collected Coins
+        if (CollectedCoins != null)
+        {
+            foreach (GameObject C in GameObject.FindGameObjectsWithTag("Coin"))
+            {
+                if (CollectedCoins.Contains(C.GetInstanceID()))
+                {
+                    GameObject.Destroy(C);
+                }
             }
         }
 
@@ -126,8 +180,14 @@ public class GameManager : MonoBehaviour
     public void SceneTransition(string Scene, int ID)
     {
         StartCoroutine(LoadScene(ID,Scene,false));
+    }
+
+    public void SaveGame(string Scene, int ID)
+    {
         SceneName = Scene;
         SpawnID = ID;
+        CollectedCoins = new List<int>();
+        PC.Health = PC.MaxHealth;
         SaveManager.Save();
     }
 
@@ -137,6 +197,9 @@ public class GameManager : MonoBehaviour
         {
             SceneName = "Plains 1";
             SpawnID = -1;
+            CollectedCoins = new List<int>();
+            Coins = 0;
+            Score = 0;
             StartCoroutine(LoadScene(-1,"Plains 1",true));
             SaveManager.Save();
         }
@@ -148,4 +211,6 @@ public struct GameSaveData
 {
     public string SceneName;
     public int SpawnID;
+    public int Coins;
+    public int Score;
 }

@@ -8,6 +8,8 @@ TagManager:
   - OneWayMap
   - SpawnObject
   - DefaultSpawnObject
+  - Coin
+  - SaveObject
   layers:
   - Default
   - TransparentFX

@@ -16,7 +16,7 @@ public class HurtboxDetection : MonoBehaviour
     RedSlimeMovement RSM;
     AudioSource AS;
     GameObject GameController;
-    StatManager SM;
+    GameManager GM;
 
     public AudioClip HurtSound;
     public AudioClip DeathSound;
@@ -29,7 +29,7 @@ public class HurtboxDetection : MonoBehaviour
         RSM = Parent.GetComponent<RedSlimeMovement>();
         AS = gameObject.GetComponent<AudioSource>();
         GameController = GameObject.FindGameObjectWithTag("GameController");
-        SM = GameController.GetComponent<StatManager>();
+        GM = GameController.GetComponent<GameManager>();
     }
 
     private IEnumerator OnTriggerEnter2D(Collider2D collision)
@@ -46,7 +46,7 @@ public class HurtboxDetection : MonoBehaviour
                 RSM.enabled = false;
                 BC.enabled = false;
                 RSM.Dead = true;
-                SM.ScoreChange(ScoreOnDeath);
+                GM.ScoreChange(ScoreOnDeath);
                 StartCoroutine(AudioPlay(DeathSound, 1f));
                 byte R = (byte)(SR.color.r * 150);
                 byte G = (byte)(SR.color.g * 150);
