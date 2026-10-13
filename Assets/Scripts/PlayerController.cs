@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 {
     public int Health;
     public int MaxHealth;
+    public float CameraOffset;
     public float JumpHeight;
     public float SuperJumpHeight;
     public float MovementSpeed;
@@ -139,7 +140,12 @@ public class PlayerController : MonoBehaviour
             AN.SetBool("Walking", false);
             AN.SetBool("Sliding", false);
             AN.SetBool("SuperJumping", false);
+            AN.SetBool("Transitioning", true);
             PS.Stop();
+        }
+        else
+        {
+            AN.SetBool("Transitioning", false);
         }
 
         //Jumping
@@ -200,7 +206,7 @@ public class PlayerController : MonoBehaviour
         }
         if (YAxisRaw == 1 && Mathf.Approximately(RB.velocity.y, 0f) == true && (GroundChecker.IsTouching(CollideMap) || GroundChecker.IsTouching(OneWayMap)))
         {
-            Cam.transform.position = new Vector3(Cam.transform.position.x, Mathf.Lerp(Cam.transform.position.y, gameObject.transform.position.y + 1.5f, 5f * Time.deltaTime), -10);
+            Cam.transform.position = new Vector3(Cam.transform.position.x, Mathf.Lerp(Cam.transform.position.y, gameObject.transform.position.y + CameraOffset + 1.5f, 5f * Time.deltaTime), -10);
             SuperChargeMultiplier = 0.25f;
 
             if (SuperJumpTimer < 3)
@@ -222,18 +228,18 @@ public class PlayerController : MonoBehaviour
         }
         if (YAxisRaw == -1 && Mathf.Approximately(RB.velocity.y, 0f) == true && (GroundChecker.IsTouching(CollideMap) || GroundChecker.IsTouching(OneWayMap)))
         {
-            Cam.transform.position = new Vector3(Cam.transform.position.x, Mathf.Lerp(Cam.transform.position.y, gameObject.transform.position.y - 1.5f, 5f * Time.deltaTime), -10);
+            Cam.transform.position = new Vector3(Cam.transform.position.x, Mathf.Lerp(Cam.transform.position.y, gameObject.transform.position.y + CameraOffset - 1.5f, 5f * Time.deltaTime), -10);
             SuperChargeMultiplier = 0.25f;
         }
         if (YAxisRaw == 0)
         {
             if (SuperJumping == true)
             {
-                Cam.transform.position = new Vector3(Cam.transform.position.x, Mathf.Lerp(Cam.transform.position.y, gameObject.transform.position.y, 5f * Time.deltaTime), -10);
+                Cam.transform.position = new Vector3(Cam.transform.position.x, Mathf.Lerp(Cam.transform.position.y, gameObject.transform.position.y + CameraOffset, 5f * Time.deltaTime), -10);
             }
             else
             {
-                Cam.transform.position = new Vector3(Cam.transform.position.x, Mathf.Lerp(Cam.transform.position.y, gameObject.transform.position.y, 7.5f * Time.deltaTime), -10);
+                Cam.transform.position = new Vector3(Cam.transform.position.x, Mathf.Lerp(Cam.transform.position.y, gameObject.transform.position.y + CameraOffset, 7.5f * Time.deltaTime), -10);
             }
             SuperChargeMultiplier = 1f;
         }

@@ -14,6 +14,7 @@ public class HurtboxDetection : MonoBehaviour
     Rigidbody2D RB;
     BoxCollider2D BC;
     RedSlimeMovement RSM;
+    GreenSlimeMovement GSM;
     AudioSource AS;
     GameObject GameController;
     GameManager GM;
@@ -27,6 +28,7 @@ public class HurtboxDetection : MonoBehaviour
         RB = Parent.GetComponent<Rigidbody2D>();
         BC = Parent.GetComponent<BoxCollider2D>();
         RSM = Parent.GetComponent<RedSlimeMovement>();
+        GSM = Parent.GetComponent<GreenSlimeMovement>();
         AS = gameObject.GetComponent<AudioSource>();
         GameController = GameObject.FindGameObjectWithTag("GameController");
         GM = GameController.GetComponent<GameManager>();
@@ -43,9 +45,17 @@ public class HurtboxDetection : MonoBehaviour
             StartCoroutine(AudioPlay(HurtSound, 1f));
             if (Health <= 0)
             {
-                RSM.enabled = false;
+                if (RSM != null)
+                {
+                    RSM.enabled = false;
+                    RSM.Dead = true;
+                }
+                if (GSM != null)
+                {
+                    GSM.enabled = false;
+                    GSM.Dead = true;
+                }
                 BC.enabled = false;
-                RSM.Dead = true;
                 GM.ScoreChange(ScoreOnDeath);
                 StartCoroutine(AudioPlay(DeathSound, 1f));
                 byte R = (byte)(SR.color.r * 150);

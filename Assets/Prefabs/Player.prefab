@@ -5177,6 +5177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 5
   MaxHealth: 5
+  CameraOffset: 1
   JumpHeight: 5
   SuperJumpHeight: 9.5
   MovementSpeed: 5

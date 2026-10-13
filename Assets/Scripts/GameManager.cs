@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public string SceneName = "Plains 1";
     public int SpawnID = -1;
     public List<GlobalObjectId> CollectedCoins = new List<GlobalObjectId>();
+    public List<int> SecretCoins = new List<int>();
 
     public AudioClip PlainsClip;
     public AudioClip ForestClip;
@@ -26,6 +27,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI CoinCounter;
     public TextMeshProUGUI ScoreCounter;
 
+    public TextMeshProUGUI SavingText;
     public Image TransitionUI;
 
     void Start()
@@ -47,12 +49,20 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void CoinCollect(int Value, GameObject Coin)
+    public void CoinCollect(int Value, GameObject Coin, int CoinID)
     {
         Coins += Value;
         CoinCounter.text = Coins.ToString();
         GlobalObjectId ID = GlobalObjectId.GetGlobalObjectIdSlow(Coin);
-        CollectedCoins.Add(ID);
+
+        if (CoinID > 0)
+        {
+            SecretCoins.Add(CoinID);
+        }
+        else
+        {
+            CollectedCoins.Add(ID);
+        }
     }
 
     public void ScoreChange(int Value)
@@ -63,11 +73,15 @@ public class GameManager : MonoBehaviour
 
     public void Save(ref GameSaveData Data)
     {
+        SavingText.text = "Saving...";
+        SavingText.enabled = true;
         Data.SceneName = SceneName;
         Data.SpawnID = SpawnID;
         Data.Score = Score;
         Data.Coins = Coins;
+        Data.SecretCoins = SecretCoins;
         Debug.Log(Data.SceneName);
+        StartCoroutine(SaveText());
     }
 
     public void Load(GameSaveData Data)
@@ -78,8 +92,16 @@ public class GameManager : MonoBehaviour
         ScoreCounter.text = Score.ToString();
         Coins = Data.Coins;
         CoinCounter.text = Coins.ToString();
+        SecretCoins = Data.SecretCoins;
         StartCoroutine(LoadScene(Data.SpawnID, Data.SceneName, true));
         Debug.Log(Data.SceneName);
+    }
+
+    IEnumerator SaveText()
+    {
+        SavingText.text = "Saved!";
+        yield return new WaitForSeconds(2f);
+        SavingText.enabled = false;
     }
 
     IEnumerator LoadScene(int ID, string Scene, bool InstantTransition)
@@ -161,6 +183,20 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+        if (SecretCoins != null)
+        {
+            foreach (GameObject C in GameObject.FindGameObjectsWithTag("SecretCoin"))
+            {
+                foreach (int CID in SecretCoins)
+                {
+                    if (CID.Equals(C.GetComponent<CoinScript>().ID))
+                    {
+                        C.GetComponent<SpriteRenderer>().enabled = false;
+                        C.GetComponent<Collider2D>().enabled = false;
+                    }
+                }
+            }
+        }
 
         A = 255;
         for (int i = 10; i > 0; i--)
@@ -202,8 +238,11 @@ public class GameManager : MonoBehaviour
             SceneName = "Plains 1";
             SpawnID = -1;
             CollectedCoins = new List<GlobalObjectId>();
+
             Coins = 0;
             Score = 0;
+            CoinCounter.text = Coins.ToString();
+            ScoreCounter.text = Score.ToString();
             StartCoroutine(LoadScene(-1,"Plains 1",true));
             SaveManager.Save();
         }
@@ -217,4 +256,5 @@ public struct GameSaveData
     public int SpawnID;
     public int Coins;
     public int Score;
+    public List<int> SecretCoins;
 }

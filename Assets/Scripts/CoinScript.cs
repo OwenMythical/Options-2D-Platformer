@@ -9,6 +9,7 @@ public class CoinScript : MonoBehaviour
 {
     public int Value;
     public float Pitch;
+    public int ID;
     bool Collected = false;
 
     GameObject Player;
@@ -41,7 +42,7 @@ public class CoinScript : MonoBehaviour
             byte G = (byte)(SR.color.g * 150);
             byte B = (byte)(SR.color.b * 150);
             Collected = true;
-            GM.CoinCollect(Value,gameObject);
+            GM.CoinCollect(Value,gameObject,ID);
             GM.ScoreChange(Value * 50);
             AN.speed = 5;
             RB.bodyType = RigidbodyType2D.Dynamic;

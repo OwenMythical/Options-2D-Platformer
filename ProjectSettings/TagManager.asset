@@ -10,6 +10,7 @@ TagManager:
   - DefaultSpawnObject
   - Coin
   - SaveObject
+  - SecretCoin
   layers:
   - Default
   - TransparentFX
