@@ -42,6 +42,11 @@ public class HurtboxDetection : MonoBehaviour
             Hitbox.SetActive(false);
             collision.gameObject.GetComponent<PlayerController>().Bounce(new Vector2(0,5));
             Health -= 1;
+            if (GSM != null)
+            {
+                GSM.XSpeed = GSM.XSpeed / 2;
+                GSM.CurrentSpeed = GSM.XSpeed;
+            }
             StartCoroutine(AudioPlay(HurtSound, 1f));
             if (Health <= 0)
             {

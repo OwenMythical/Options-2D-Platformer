@@ -33,8 +33,10 @@ public class PlayerController : MonoBehaviour
     Animator AN;
     SpriteRenderer SR;
     BoxCollider2D BC;
+    GameManager GM;
     CompositeCollider2D CollideMap;
     CompositeCollider2D OneWayMap;
+    Camera CamComponent;
 
     AudioSource AS;
     public AudioClip ChargedSound;
@@ -57,6 +59,8 @@ public class PlayerController : MonoBehaviour
             SR = gameObject.GetComponent<SpriteRenderer>();
             BC = gameObject.GetComponent<BoxCollider2D>();
             AS = gameObject.GetComponent<AudioSource>();
+            GM = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+            CamComponent = Cam.GetComponent<Camera>();
 
             StartCoroutine(SuperJumpFlicker());
         }
@@ -139,6 +143,7 @@ public class PlayerController : MonoBehaviour
             RB.velocity = new Vector2(0, 0);
             AN.SetBool("Walking", false);
             AN.SetBool("Sliding", false);
+            AN.SetBool("Stunned", false);
             AN.SetBool("SuperJumping", false);
             AN.SetBool("Transitioning", true);
             PS.Stop();
@@ -151,9 +156,10 @@ public class PlayerController : MonoBehaviour
         //Jumping
         if (Input.GetKey(KeyCode.Space) == true && Mathf.Approximately(RB.velocity.y, 0f) == true && (GroundChecker.IsTouching(CollideMap) || GroundChecker.IsTouching(OneWayMap)))
         {
+            AN.SetBool("Stunned", false);
+            Stunned = false;
             if (SuperJumpTimer > 2.5)
             {
-                RB.velocity += new Vector2(0, SuperJumpHeight);
                 SuperJumpTimer = 0;
                 SuperJumping = true;
                 AN.SetBool("SuperJumping", true);
@@ -163,11 +169,13 @@ public class PlayerController : MonoBehaviour
 
                 if (Mathf.Abs(XAxis) > 0.75f && SuperChargeMultiplier == 1)
                 {
-                    SuperLeaping = true;
+                    RB.velocity += new Vector2(0, SuperJumpHeight);
+                    //SuperLeaping = true;
                     SuperJumpMultiplier = 0.25f;
                 }
                 else
                 {
+                    RB.velocity += new Vector2(0, SuperJumpHeight);
                     SuperJumpMultiplier = 0.25f;
                 }
             }
@@ -251,6 +259,18 @@ public class PlayerController : MonoBehaviour
         {
             PS.Stop();
         }
+
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            if (CamComponent.orthographicSize == 4)
+            {
+                CamComponent.orthographicSize = 6;
+            }
+            else if (CamComponent.orthographicSize == 6)
+            {
+                CamComponent.orthographicSize = 4;
+            }
+        }
     }
 
     IEnumerator SuperJumpFlicker()
@@ -304,10 +324,10 @@ public class PlayerController : MonoBehaviour
             AN.SetBool("Stunned", true);
             StartCoroutine(AudioPlay(HurtSound, 1f));
 
-            Health -= Value; //Needs a proper death animation and to not just quit the application!!!
+            Health -= Value; //Needs a proper death animation ------------------------------------------------------------------------------------------- !!!
             if (Health <= 0)
             {
-                Application.Quit();
+                GM.RespawnLoad();
             }
 
             RB.velocity = (gameObject.transform.position - Source) * KnockbackForce + new Vector3(0, KnockbackForce);

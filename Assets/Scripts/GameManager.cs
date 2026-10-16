@@ -97,6 +97,11 @@ public class GameManager : MonoBehaviour
         Debug.Log(Data.SceneName);
     }
 
+    public void RespawnLoad()
+    {
+        StartCoroutine(LoadScene(SpawnID, SceneName, false));
+    }
+
     IEnumerator SaveText()
     {
         SavingText.text = "Saved!";
@@ -119,6 +124,7 @@ public class GameManager : MonoBehaviour
         }
         TransitionUI.color = new Color32(0, 0, 0, 255);
 
+        PC.Health = PC.MaxHealth;
         PC.TransitionStun = true;
         //Scene Loading
         if (Scene == "")

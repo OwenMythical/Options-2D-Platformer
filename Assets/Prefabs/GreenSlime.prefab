@@ -260,7 +260,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d63b71e10656f94c92ad467d400a2b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  XSpeed: 3
+  XSpeed: 4
+  CurrentSpeed: 0
   JumpHeight: 5
   Dead: 0
   TileChecker: {fileID: 271092313467677550}
@@ -309,7 +310,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 72
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -5281,7 +5282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 065907d45408ec64fb4162adcbe38177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 1
+  Health: 2
   ScoreOnDeath: 100
   Hitbox: {fileID: 7190757726637855017}
   Parent: {fileID: 1158424383572168799}

@@ -7,7 +7,7 @@ using UnityEngine.Tilemaps;
 public class GreenSlimeMovement : MonoBehaviour
 {
     public float XSpeed;
-    float CurrentSpeed;
+    public float CurrentSpeed;
     public float JumpHeight;
     public bool Dead;
     public GameObject TileChecker;
@@ -78,7 +78,7 @@ public class GreenSlimeMovement : MonoBehaviour
         Paused = true;
         RB.velocity = new Vector2(0, 0);
         PS.Stop();
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
         if (gameObject.transform.rotation.y == 0)
         {
             gameObject.transform.rotation = new Quaternion(0, 180, 0, 0);
