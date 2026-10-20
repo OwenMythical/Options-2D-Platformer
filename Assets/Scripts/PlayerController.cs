@@ -26,7 +26,6 @@ public class PlayerController : MonoBehaviour
 
     public bool Stunned = false;
     float StunMultiplier = 1;
-    public float KnockbackForce;
     public bool TransitionStun = false;
 
     Rigidbody2D RB;
@@ -316,7 +315,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(0);
     }
 
-    public IEnumerator Damage(int Value,Vector3 Source)
+    public IEnumerator Damage(int Value,Vector3 Source, int KnockbackForce)
     {
         if (Stunned == false && StunMultiplier == 1)
         {

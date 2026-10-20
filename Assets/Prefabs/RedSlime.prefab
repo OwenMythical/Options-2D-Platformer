@@ -167,6 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2002207751f5e4c4a9f1670c869f4e4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Knockback: 5
   Hurtbox: {fileID: 9097638164964517620}
 --- !u!1 &1912401655637844463
 GameObject:

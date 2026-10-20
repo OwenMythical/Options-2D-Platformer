@@ -237,6 +237,13 @@ public class GameManager : MonoBehaviour
         SaveManager.Save();
     }
 
+    public void DemoEnd()
+    {
+        SceneManager.LoadScene("DemoEnd");
+        GameObject.Destroy(Player);
+        GameObject.Destroy(gameObject);
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha0))
