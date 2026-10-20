@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEditor;
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -15,7 +14,7 @@ public class GameManager : MonoBehaviour
     PlayerController PC;
     public string SceneName = "Plains 1";
     public int SpawnID = -1;
-    public List<GlobalObjectId> CollectedCoins = new List<GlobalObjectId>();
+    //public List<GlobalObjectId> CollectedCoins = new List<GlobalObjectId>();
     public List<int> SecretCoins = new List<int>();
 
     public AudioClip PlainsClip;
@@ -53,7 +52,7 @@ public class GameManager : MonoBehaviour
     {
         Coins += Value;
         CoinCounter.text = Coins.ToString();
-        GlobalObjectId ID = GlobalObjectId.GetGlobalObjectIdSlow(Coin);
+        //GlobalObjectId ID = GlobalObjectId.GetGlobalObjectIdSlow(Coin);
 
         if (CoinID > 0)
         {
@@ -61,7 +60,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            CollectedCoins.Add(ID);
+            //CollectedCoins.Add(ID);
         }
     }
 
@@ -175,20 +174,20 @@ public class GameManager : MonoBehaviour
             }
         }
         //Collected Coins
-        if (CollectedCoins != null)
-        {
-            foreach (GameObject C in GameObject.FindGameObjectsWithTag("Coin"))
-            {
-                foreach (GlobalObjectId CID in CollectedCoins)
-                {
-                    if (CID.Equals(GlobalObjectId.GetGlobalObjectIdSlow(C)))
-                    {
-                        C.GetComponent<SpriteRenderer>().enabled = false;
-                        C.GetComponent<Collider2D>().enabled = false;
-                    }
-                }
-            }
-        }
+        //if (CollectedCoins != null)
+        //{
+        //    foreach (GameObject C in GameObject.FindGameObjectsWithTag("Coin"))
+        //    {
+        //        foreach (GlobalObjectId CID in CollectedCoins)
+        //        {
+        //            if (CID.Equals(GlobalObjectId.GetGlobalObjectIdSlow(C)))
+        //            {
+        //                C.GetComponent<SpriteRenderer>().enabled = false;
+        //                C.GetComponent<Collider2D>().enabled = false;
+        //            }
+        //        }
+        //    }
+        //}
         if (SecretCoins != null)
         {
             foreach (GameObject C in GameObject.FindGameObjectsWithTag("SecretCoin"))
@@ -224,13 +223,13 @@ public class GameManager : MonoBehaviour
     {
         SceneName = Scene;
         SpawnID = ID;
-        CollectedCoins = new List<GlobalObjectId>();
+        //CollectedCoins = new List<GlobalObjectId>();
         foreach (GameObject C in GameObject.FindGameObjectsWithTag("Coin"))
         {
             if (C.GetComponent<SpriteRenderer>().enabled == false)
             {
-                GlobalObjectId CID = GlobalObjectId.GetGlobalObjectIdSlow(C);
-                CollectedCoins.Add(CID);
+                //GlobalObjectId CID = GlobalObjectId.GetGlobalObjectIdSlow(C);
+                //CollectedCoins.Add(CID);
             }
         }
         PC.Health = PC.MaxHealth;
@@ -250,7 +249,7 @@ public class GameManager : MonoBehaviour
         {
             SceneName = "Plains 1";
             SpawnID = -1;
-            CollectedCoins = new List<GlobalObjectId>();
+            //CollectedCoins = new List<GlobalObjectId>();
 
             Coins = 0;
             Score = 0;

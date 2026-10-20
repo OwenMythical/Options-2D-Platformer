@@ -294745,6 +294745,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5087322918424482561, guid: 2767467a5ce62b24bb6cb7b516ca97cc, type: 3}
+      propertyPath: Smoothing
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5087322918424482561, guid: 2767467a5ce62b24bb6cb7b516ca97cc, type: 3}
       propertyPath: JumpHeight
       value: 5
       objectReference: {fileID: 0}
@@ -300016,7 +300020,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8512101788876715217, guid: 2fc2a0c87a4480340a87d1fbf317ac2e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.116554
+      value: 9.616554
       objectReference: {fileID: 0}
     - target: {fileID: 8512101788876715217, guid: 2fc2a0c87a4480340a87d1fbf317ac2e, type: 3}
       propertyPath: m_LocalPosition.y

@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
@@ -66,14 +65,15 @@ public class PlayerController : MonoBehaviour
     }
 
     float XAxis = 0f;
-    float Smoothing = 0.05f;
+    public float Smoothing = 1f;
     void Update()
     {
         CollideMap = GameObject.FindGameObjectWithTag("CollideMap").GetComponent<CompositeCollider2D>();
         OneWayMap = GameObject.FindGameObjectWithTag("OneWayMap").GetComponent<CompositeCollider2D>();
 
         float XAxisRaw = Input.GetAxisRaw("Horizontal");
-        XAxis = Mathf.Lerp(XAxis, XAxisRaw, Smoothing);
+        //XAxis = Mathf.Lerp(XAxis, XAxisRaw, Smoothing * Time.deltaTime);
+        XAxis = XAxisRaw;
         if (XAxis < 0.1f && XAxis > -0.1f && XAxisRaw == 0)
         {
             XAxis = 0;
