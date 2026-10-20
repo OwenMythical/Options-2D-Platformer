@@ -16,6 +16,7 @@ public class GreenBossMovement : MonoBehaviour
     public ParticleSystem PS;
     Tilemap TM;
     Rigidbody2D RB;
+    GameManager GM;
     AudioSource AS;
     Animator AN;
     bool Paused = false;
@@ -23,6 +24,7 @@ public class GreenBossMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GM = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         TM = GameObject.FindGameObjectWithTag("CollideMap").GetComponent<Tilemap>();
         RB = gameObject.GetComponent<Rigidbody2D>();
         AS = gameObject.GetComponent<AudioSource>();
@@ -32,6 +34,7 @@ public class GreenBossMovement : MonoBehaviour
 
     public void StartBoss()
     {
+        GM.BossStarted("GreenSlimeBoss");
         StartCoroutine(AttackPattern());
     }
 

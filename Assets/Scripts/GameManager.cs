@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
 
     public AudioClip PlainsClip;
     public AudioClip ForestClip;
+    public AudioClip GreenBossMusic;
     AudioSource AS;
 
     public int Coins = 0;
@@ -241,6 +242,15 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("DemoEnd");
         GameObject.Destroy(Player);
         GameObject.Destroy(gameObject);
+    }
+
+    public void BossStarted(string Boss)
+    {
+        if (Boss == "GreenSlimeBoss")
+        {
+            AS.clip = GreenBossMusic;
+            AS.Play();
+        }
     }
 
     void Update()

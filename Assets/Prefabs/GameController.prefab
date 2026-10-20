@@ -984,8 +984,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SceneName: Plains 1
   SpawnID: -1
+  SecretCoins: 
   PlainsClip: {fileID: 8300000, guid: bcd9d7b7d2a285945992b3e0c639bac1, type: 3}
   ForestClip: {fileID: 8300000, guid: 462c8643d0ac22f49ad965424fbe8aed, type: 3}
+  GreenBossMusic: {fileID: 8300000, guid: eda384d0683f45849b03d1dcaef86619, type: 3}
   Coins: 0
   Score: 0
   CoinCounter: {fileID: 1131743378462277200}
