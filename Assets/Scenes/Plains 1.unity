@@ -170395,6 +170395,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Secret Coin
       objectReference: {fileID: 0}
+    - target: {fileID: 4322085878588504448, guid: 43cecb00a164af04dbc7563134bc90e3, type: 3}
+      propertyPath: ID
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5367572568799177248, guid: 43cecb00a164af04dbc7563134bc90e3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 51.060806
